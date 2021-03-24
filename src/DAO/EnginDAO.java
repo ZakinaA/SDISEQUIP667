@@ -5,7 +5,6 @@
  */
 package DAO;
 
-import static DAO.EnginTypeDAO.requete;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
