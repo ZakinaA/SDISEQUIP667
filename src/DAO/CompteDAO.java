@@ -60,7 +60,7 @@ public class CompteDAO {
     }
     
     
-        public static Compte AddCompte(Connection connection, Compte pCompte){
+        public static int AddCompte(Connection connection, Compte pCompte){
 
             int resultInsert = -1;
             try {
