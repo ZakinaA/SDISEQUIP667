@@ -16,6 +16,7 @@ public class Compte {
     private int id;
     private String mdp;
     private Pompier lePompier;
+    private Boolean isAdmin;
 
     //constructeur de la classe avec paramètre
     public Compte(int id, String mdp) {
@@ -45,7 +46,10 @@ public class Compte {
     }
 
     
-    
+        //getter du pompier
+    public Boolean isAdmin() {
+        return isAdmin;
+    }
     
     
     
@@ -62,6 +66,11 @@ public class Compte {
     //setter du pompier
     public void setLePompier(Pompier lePompier) {
         this.lePompier = lePompier;
+    }
+    
+    
+    public void setAdmin(Boolean bool) {
+        this.isAdmin = bool;
     }
     
     
