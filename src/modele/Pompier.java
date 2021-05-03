@@ -23,6 +23,7 @@ public class Pompier {
     private String pom_telephone;
     private Pompier leResponsable;
     private Grade leGrade;
+    private Caserne laCaserne;
     
     
     private ArrayList<Fonction> lesFonctions ;
@@ -88,6 +89,11 @@ public class Pompier {
     //Récupérer le grade du pompier
     public Grade getLeGrade() {
         return leGrade;
+    }
+    
+    //Récupérer le grade du pompier
+    public Caserne getLaCaserne() {
+        return laCaserne;
     }
     
 
@@ -180,6 +186,13 @@ public class Pompier {
     public void setLeGrade(Grade leGrade) {
         this.leGrade = leGrade;
     }
+    
+    //setter de caserne du pompier
+    public void setLaCaserne(Caserne laCaserne) {
+        this.laCaserne = laCaserne;
+    }
+
+
     
     
     

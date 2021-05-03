@@ -10,7 +10,8 @@ package modele;
  * @author ts1sio
  */
 public class Volontaire extends Pompier {
-    
+    private int matricule;
+    private int professionId;
     private Profession laProfession;
     
     // Constructeur Vide
@@ -18,9 +19,23 @@ public class Volontaire extends Pompier {
         super();
     }
     
+    public Volontaire(int pMatricule, int pProfessionId){
+        super();
+        this.matricule = pMatricule;
+        this.professionId = pProfessionId;
+    }
+    
     
     
     //GETTERS
+    public int getMatricule() {
+        return matricule;
+    }
+    
+    public int getProfessionId() {
+        return professionId;
+    }
+    
     public Profession getLaProfession() {
         return laProfession;
     }
@@ -30,6 +45,12 @@ public class Volontaire extends Pompier {
     //SETTERS
     public void setLaProfession(Profession laProfession) {
         this.laProfession = laProfession;
+    }
+    public void setLeMatricule(int pMatricule) {
+        this.matricule = pMatricule;
+    }
+    public void setLeProfessionId(int pProfessionId) {
+        this.professionId = pProfessionId;
     }
     
     

@@ -23,8 +23,6 @@ public class Caserne {
     private ArrayList<Engin> lesEngins;
 
     
-    
-    
     //Constructeur de la classe avec paramètres
     public Caserne(int id, String rue, String nom, String cp, String ville, ArrayList<Pompier> lesPompiersDelaCaserne) {
         this.id = id;

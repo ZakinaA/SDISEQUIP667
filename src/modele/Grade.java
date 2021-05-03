@@ -27,9 +27,6 @@ public class Grade {
     }
     
     
-    
-    
-    
         //Récupérer les pompiers équivalent au grade
     public ArrayList<Pompier> getLesPompiers() {
         return lesPompiers;

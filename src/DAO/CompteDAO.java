@@ -13,7 +13,9 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modele.Compte;
+import modele.Grade;
 import modele.Pompier;
+import modele.Caserne;
 
 
 /**
@@ -29,25 +31,51 @@ public class CompteDAO {
     public static Compte getCompte(Connection connection, int matricule, String mdp){
         Compte leCompte = new Compte();
             try {
-                requete=connection.prepareStatement("SELECT * FROM COMPTE, POMPIER WHERE compte.pom_id = pom_id AND compte.pom_id = ? AND com_mdp = ?");
+                requete=connection.prepareStatement("SELECT * FROM COMPTE, GRADE, POMPIER, CASERNE WHERE compte.pom_id = ? and pompier.pom_id = ? and compte.com_mdp = ? ORDER BY compte.pom_id LIMIT 1");
                 requete.setString(1, String.valueOf(matricule));
-                requete.setString(2, mdp);
-                
-                
-                
-                
+                requete.setString(2, String.valueOf(matricule));
+                requete.setString(3, mdp);
+                              
                 rs=requete.executeQuery();
+                
                 if(rs.next()){
                     Pompier lePompier = new Pompier();
+                    Grade leGrade = new Grade();
+                    Caserne laCaserne = new Caserne();
                     
-                    lePompier.setPom_id(Integer.valueOf(rs.getString("pom_id")));
-                    leCompte.setId(Integer.valueOf(rs.getString("COM_ID")));
+                    //SET COMPTE 
+                    leCompte.setId(Integer.valueOf(rs.getString("pom_id")));
                     leCompte.setLePompier(lePompier);
                     leCompte.setMdp(rs.getString("com_mdp"));
+                    leCompte.setLeType(rs.getString("com_type"));
+                    
+                    //SET POMPIER         
+                    lePompier.setPom_id(Integer.valueOf(rs.getString("pom_id")));
+                    lePompier.setPom_prenom(rs.getString("pom_prenom"));
+                    lePompier.setPom_nom(rs.getString("pom_nom"));
+                    lePompier.setPom_dateNaissance(rs.getString("pom_datenaissance"));
+                    lePompier.setPom_numeroBip(Integer.valueOf(rs.getString("pom_numerobip")));
+                    lePompier.setPom_sexe(rs.getString("pom_sexe"));
+                    lePompier.setPom_telephone(rs.getString("pom_telephone"));
+                    
+                    //SET CASERNE 
+                    laCaserne.setId(Integer.valueOf(rs.getString("cas_id")));
+                    laCaserne.setNom(rs.getString("cas_nom"));
+                    laCaserne.setRue(rs.getString("cas_rue"));
+                    laCaserne.setCp(rs.getString("cas_CP"));
+                    laCaserne.setVille(rs.getString("cas_ville"));
+                    
+                    //SET GRADE
+                    leGrade.setId(Integer.valueOf(rs.getString("gra_id")));
+                    leGrade.setLibelle(rs.getString("gra_libelle"));
+
+                    //SET ITEMS
+                    leCompte.setLePompier(lePompier);
+                    lePompier.setLeGrade(leGrade);
+                    lePompier.setLaCaserne(laCaserne);
+
                 }
 
-                
-                    
                 
                     ConnexionBdd.fermerConnexion(rs);
                     ConnexionBdd.fermerConnexion(requete); 
@@ -69,22 +97,13 @@ public class CompteDAO {
                 requete.setString(2, pCompte.getMdp());
                 
                 Pompier lePompier = new Pompier();
-                 boolean isAdmin = pCompte.isAdmin();
-                requete.setString(3, String.valueOf(isAdmin));
+                 String leType = pCompte.getLeType();
+                requete.setString(3, leType);
                 
                 
                 resultInsert = requete.executeUpdate();
                     
                    
-                    
-                   
-                   
-                    
-                
-
-                
-                    
-                
                     ConnexionBdd.fermerConnexion(rs);
                     ConnexionBdd.fermerConnexion(requete); 
             }catch (SQLException e){

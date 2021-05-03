@@ -24,7 +24,7 @@ public class EnginTypeDAO {
         public static EnginType getEnginById(Connection connection, int matricule){
             EnginType unEnginType = new EnginType();
             try {
-                requete=connection.prepareStatement("SELECT * FROM ENGINTYPE WHERE ENGTYP_ID = ?");
+                requete=connection.prepareStatement("SELECT * FROM ENFINTYPE WHERE ENGTYP_ID = ?");
                 requete.setString(1, String.valueOf(matricule));
 
                 //executer la reguete
