@@ -5,9 +5,11 @@
  */
 package vue;
 
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.TableModel;
+import DAO.CaserneDAO;
+import DAO.ConnexionBdd;
+import java.sql.Connection;
+import java.util.ArrayList;
+import modele.Caserne;
 import modele.Compte;
 
 /**
@@ -17,12 +19,46 @@ import modele.Compte;
 public class ListeCaserne extends javax.swing.JFrame {
     
     Compte leCompte;
+    
 
     /**
      * Creates new form Accueil
      */
     public ListeCaserne() {
         initComponents();
+        
+        String[][] tableau = {};
+        Connection cnt =  ConnexionBdd.ouvrirConnexion();
+        ArrayList<Caserne> lesCasernes = CaserneDAO.getLesCasernes(cnt);
+        
+        for(int i = 0; i < lesCasernes.size(); i++){
+            Caserne uneCaserne = lesCasernes.get(i) ;
+            tableau[][] = {
+                String.valueOf(uneCaserne.getId()),
+                uneCaserne.getNom(),
+                uneCaserne.getRue(),
+                uneCaserne.getCp(),
+                uneCaserne.getVille()
+            }
+        }
+
+        
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
+            tableau,
+            new String [] {
+                "ID", "NOM", "RUE", "CP", "VILLE"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        }); 
+        
+        
     }
     
     
@@ -65,10 +101,10 @@ public class ListeCaserne extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/barre.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 720, 60));
 
-        jLabel4.setFont(new java.awt.Font("Reem Kufi", 0, 36)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 204, 204));
-        jLabel4.setText("Liste Casernes");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 240, -1));
+        jLabel4.setText("Liste des casernes");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 300, 90));
 
         jButton6.setText("AJOUTER");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -177,38 +213,8 @@ public class ListeCaserne extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ListeCaserne.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+
+
 
         /* Create and display the form */
         
