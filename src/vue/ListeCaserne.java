@@ -56,6 +56,8 @@ public class ListeCaserne extends javax.swing.JFrame {
     public ListeCaserne(Compte unCompte) {
         initComponents();
         
+        leCompte = unCompte;
+        
         Connection cnt =  ConnexionBdd.ouvrirConnexion();
         ArrayList<Caserne> lesCasernes = CaserneDAO.getLesCasernes(cnt);
         
@@ -130,6 +132,7 @@ public class ListeCaserne extends javax.swing.JFrame {
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+
             },
             new String [] {
                 "ID", "NOM", "RUE", "CP", "VILLE"
