@@ -5,13 +5,13 @@
  */
 package vue;
 
-import DAO.CompteDAO;
 import DAO.ConnexionBdd;
-import DAO.PompierDAO;
+import DAO.CaserneDAO;
 import DAO.ProfessionDAO;
 import DAO.ProfessionnelDAO;
 import DAO.VolontaireDAO;
 import java.sql.Connection;
+import modele.Caserne;
 import modele.Compte;
 import modele.Pompier;
 import modele.Profession;
@@ -29,6 +29,7 @@ public class MenuSalarie extends javax.swing.JFrame {
     String leType;
     Compte leCompte;
     Pompier lePompier;
+    Caserne laCaserne;
 
     /**
      * Creates new form Accueil
@@ -43,10 +44,13 @@ public class MenuSalarie extends javax.swing.JFrame {
         leMatricule = unCompte.getId();
         leType = unCompte.getLeType();
         leCompte = unCompte;
-        
        
         //FONCTION 
         lePompier = unCompte.getLePompier();
+        
+        //GET CASERNE
+        cnt = ConnexionBdd.ouvrirConnexion();
+        laCaserne = CaserneDAO.getCaserneById(cnt, lePompier.getLaCaserne().getId());
         
         //SET NAME
         j_prename.setText(String.valueOf(lePompier.getPom_nom().toUpperCase()));
@@ -84,7 +88,7 @@ public class MenuSalarie extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, -1));
 
-        jButton4.setText("CASERNE");
+        jButton4.setText("MA CASERNE");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -154,7 +158,7 @@ public class MenuSalarie extends javax.swing.JFrame {
         if(leType.equals("a")){
             new ListeCaserne(leCompte).setVisible(true);
         }else if(leType.equals("s")){
-            new CaserneVue(leCompte).setVisible(true);
+            new CaserneVue(leCompte, laCaserne).setVisible(true);
         }
         
         this.setVisible(false);

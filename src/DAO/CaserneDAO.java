@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import modele.Caserne;
 import modele.Engin;
+import modele.Intervention;
 import modele.Pompier;
 
 /**
@@ -20,6 +21,8 @@ import modele.Pompier;
  * @author ts1sio
  */
 public class CaserneDAO {
+    
+    
 
     
     Connection connection=null;
@@ -51,6 +54,66 @@ public class CaserneDAO {
             return resultatUpdate; 
         }    
         
+    public static Caserne getCaserneById(Connection connection, int pCode){
+            Caserne uneCaserne = new Caserne();
+            ArrayList<Pompier> lesPompiers = null;
+            ArrayList<Engin> lesEngins = null;
+            ArrayList<Intervention> lesInterventions = null;
+
+            try {
+                requete=connection.prepareStatement("SELECT * FROM CASERNE WHERE CAS_ID = ?");
+                requete.setString(1, String.valueOf(pCode));
+
+                //executer la reguete
+                rs=requete.executeQuery();
+                if (rs.next()){
+                    uneCaserne.setId(Integer.parseInt(rs.getString("CAS_ID")));
+                    uneCaserne.setNom(rs.getString("CAS_NOM"));
+                    uneCaserne.setRue(rs.getString("CAS_RUE"));
+                    uneCaserne.setCp(rs.getString("CAS_CP"));
+                    uneCaserne.setVille(rs.getString("CAS_VILLE"));
+                    
+
+                    
+                }
+                    ConnexionBdd.fermerConnexion(rs);
+                    ConnexionBdd.fermerConnexion(requete); 
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            return uneCaserne; 
+        }
         
+
+        public static ArrayList<Caserne> getLesCasernes(Connection connection){
+        
+            ArrayList<Caserne> lesCasernes = null;
+
+
+            try {
+                requete=connection.prepareStatement("SELECT * FROM CASERNE");
+
+                //executer la reguete
+                rs=requete.executeQuery();
+                while(rs.next()){
+                    Caserne uneCaserne = new Caserne();
+                    uneCaserne.setId(Integer.parseInt(rs.getString("CAS_ID")));
+                    uneCaserne.setNom(rs.getString("CAS_NOM"));
+                    uneCaserne.setRue(rs.getString("CAS_RUE"));
+                    uneCaserne.setCp(rs.getString("CAS_CP"));
+                    uneCaserne.setVille(rs.getString("CAS_VILLE"));
+                    
+
+                    lesCasernes.add(uneCaserne);
+                }
+                    ConnexionBdd.fermerConnexion(rs);
+                    ConnexionBdd.fermerConnexion(requete); 
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            return lesCasernes; 
+        }
         
 }

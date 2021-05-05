@@ -5,6 +5,7 @@
  */
 package vue;
 
+import modele.Caserne;
 import modele.Compte;
 
 /**
@@ -14,6 +15,7 @@ import modele.Compte;
 public class CaserneVue extends javax.swing.JFrame {
     
     Compte leCompte;
+    Caserne laCaserne;
 
     /**
      * Creates new form Accueil
@@ -23,10 +25,17 @@ public class CaserneVue extends javax.swing.JFrame {
     }
 
     
-    public CaserneVue(Compte unCompte){
+    public CaserneVue(Compte unCompte, Caserne uneCaserne){
         initComponents();
         
         leCompte = unCompte;
+        laCaserne = uneCaserne;
+        
+        //SET NAME
+        j_nom.setText(String.valueOf(laCaserne.getNom().toUpperCase()));
+        j_rue.setText(String.valueOf(laCaserne.getRue()));
+        j_cp.setText(String.valueOf(laCaserne.getCp()));
+        j_ville.setText(String.valueOf(laCaserne.getVille()));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,7 +51,7 @@ public class CaserneVue extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        j_nom = new javax.swing.JLabel();
         j_cp = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         j_ville = new javax.swing.JLabel();
@@ -68,30 +77,32 @@ public class CaserneVue extends javax.swing.JFrame {
         jLabel4.setText("CASERNE");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 220, -1));
 
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/clients.png"))); // NOI18N
         jButton5.setText("Engins");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 90, 30));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, 140, 70));
 
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/client.png"))); // NOI18N
         jButton6.setText("Pompiers");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 90, 30));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, 140, 70));
 
-        jLabel5.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel5.setText("#nomdelacaserne");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 410, -1));
+        j_nom.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
+        j_nom.setForeground(new java.awt.Color(0, 0, 204));
+        j_nom.setText("#nomdelacaserne");
+        getContentPane().add(j_nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 410, -1));
 
         j_cp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         j_cp.setText("#Cp");
-        getContentPane().add(j_cp, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 70, 20));
+        getContentPane().add(j_cp, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 340, 20));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Adresse : ");
@@ -99,11 +110,11 @@ public class CaserneVue extends javax.swing.JFrame {
 
         j_ville.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         j_ville.setText("#Ville");
-        getContentPane().add(j_ville, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 70, 20));
+        getContentPane().add(j_ville, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 330, 20));
 
         j_rue.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         j_rue.setText("#Rue");
-        getContentPane().add(j_rue, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 70, 20));
+        getContentPane().add(j_rue, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 320, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/fond.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
@@ -127,7 +138,7 @@ public class CaserneVue extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        new Pompiers().setVisible(true);
+        new Pompiers(laCaserne).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -188,9 +199,9 @@ public class CaserneVue extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel j_cp;
+    private javax.swing.JLabel j_nom;
     private javax.swing.JLabel j_rue;
     private javax.swing.JLabel j_ville;
     // End of variables declaration//GEN-END:variables
