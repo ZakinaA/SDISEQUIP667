@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/ts1sio/Documents/NetBeansProjects/SDIS_GITHUB/src/vue/MenuAdmin.java</file>
+            <file>file:/C:/Users/ts1sio/Documents/NetBeansProjects/SDIS_GITHUB/src/vue/ListeCaserne.java</file>
+            <file>file:/C:/Users/ts1sio/Documents/NetBeansProjects/SDIS_GITHUB/src/vue/MenuSalarie.java</file>
+            <file>file:/C:/Users/ts1sio/Documents/NetBeansProjects/SDIS_GITHUB/src/DAO/CaserneDAO.java</file>
+            <file>file:/C:/Users/ts1sio/Documents/NetBeansProjects/SDIS_GITHUB/src/vue/MenuResponsable.java</file>
+            <file>file:/C:/Users/ts1sio/Documents/NetBeansProjects/SDIS_GITHUB/src/vue/Connexion.java</file>
+            <file>file:/C:/Users/ts1sio/Documents/NetBeansProjects/SDIS_GITHUB/src/vue/CaserneVue.java</file>
+        </group>
     </open-files>
 </project-private>
