@@ -9,6 +9,7 @@ import DAO.ConnexionBdd;
 import DAO.FonctionsDAO;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import modele.Grade;
 import modele.Caserne;
 import modele.Fonction;
@@ -49,11 +50,16 @@ public class Profil extends javax.swing.JFrame {
         cnt = ConnexionBdd.ouvrirConnexion();
         ArrayList<Fonction> lesfonctions = FonctionsDAO.getFonctions(cnt, lePompier.getPom_id());
         
+        //String fctString = "";
+        //System.out.println("fonctions");
+        //System.out.println(lesfonctions);
+        
+        
         //SET NAME
         j_prename.setText(String.valueOf(lePompier.getPom_nom().toUpperCase()));
         j_dateNaissance.setText(String.valueOf(lePompier.getPom_dateNaissance()));
         j_numBip.setText(String.valueOf(lePompier.getPom_numeroBip()));
-        j_fonctions.setText(String.valueOf(lesfonctions));
+        //j_fonctions.setText(Arrays.toString(lesfonctions));
         j_name.setText(String.valueOf(lePompier.getPom_prenom()));
         j_grade.setText(String.valueOf(leGrade.getLibelle()));
         j_caserne.setText(String.valueOf(laCaserne.getNom()));
@@ -73,6 +79,10 @@ public class Profil extends javax.swing.JFrame {
         
         cnt = ConnexionBdd.ouvrirConnexion();
         ArrayList<Fonction> lesfonctions = FonctionsDAO.getFonctions(cnt, lePompier.getPom_id());
+        
+        String fctString = "";
+        System.out.println("foncions");
+        System.out.println(lesfonctions);
         
         //SET NAME
         j_prename.setText(String.valueOf(lePompier.getPom_nom().toUpperCase()));
