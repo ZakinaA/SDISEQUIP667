@@ -5,13 +5,13 @@
  */
 package vue;
 
-import DAO.CaserneDAO;
+import DAO.CompteDAO;
 import DAO.ConnexionBdd;
+import DAO.PompierDAO;
 import DAO.ProfessionDAO;
 import DAO.ProfessionnelDAO;
 import DAO.VolontaireDAO;
 import java.sql.Connection;
-import modele.Caserne;
 import modele.Compte;
 import modele.Pompier;
 import modele.Profession;
@@ -29,7 +29,6 @@ public class MenuAdmin extends javax.swing.JFrame {
     int leMatricule;
     String leType;
     Pompier lePompier;
-    Caserne laCaserne;
 
     /**
      * Creates new form Accueil
@@ -48,10 +47,6 @@ public class MenuAdmin extends javax.swing.JFrame {
        
         //FONCTION 
         lePompier = unCompte.getLePompier();
-        
-        //GET CASERNE
-        cnt = ConnexionBdd.ouvrirConnexion();
-        laCaserne = CaserneDAO.getCaserneById(cnt, lePompier.getLaCaserne().getId());
         
         //SET NAME
         j_prename.setText(String.valueOf(lePompier.getPom_nom().toUpperCase()));
@@ -72,8 +67,6 @@ public class MenuAdmin extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         j_prename = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         j_name = new javax.swing.JLabel();
@@ -91,14 +84,13 @@ public class MenuAdmin extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, -1));
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/clients.png"))); // NOI18N
-        jButton4.setText("LISTE DES POMPIERS");
+        jButton4.setText("CASERNE");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 390, 80));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, -1, -1));
 
         jButton3.setText("INTERVENTION");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -117,23 +109,6 @@ public class MenuAdmin extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 204, 204));
         jLabel1.setText("(ADMIN)");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 180, -1));
-
-        jButton5.setText("MA CASERNE");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
-
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/retour.png"))); // NOI18N
-        jButton6.setText("LISTE DES CASERNES");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 390, 80));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/barre.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 720, 60));
@@ -177,7 +152,13 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new ListeCaserne(leCompte).setVisible(true);    
+       System.out.println("menu admin clic caserne");
+        if(leType.equals("a")){
+            new ListeCaserne(leCompte).setVisible(true);
+        }else if(leType.equals("s")){
+            new CaserneVue(leCompte).setVisible(true);
+        }
+        
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -232,8 +213,6 @@ public class MenuAdmin extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
