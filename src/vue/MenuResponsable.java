@@ -129,7 +129,10 @@ public class MenuResponsable extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new CaserneVue().setVisible(true);
+       // new CaserneVue().setVisible(true);
+       
+       System.out.println("bouton caserne dans menuResponsable");
+       new ListeCaserne().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 

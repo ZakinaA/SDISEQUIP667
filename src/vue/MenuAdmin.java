@@ -152,6 +152,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       System.out.println("menu admin clic caserne");
         if(leType.equals("a")){
             new ListeCaserne(leCompte).setVisible(true);
         }else if(leType.equals("s")){

@@ -106,30 +106,8 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="jTable">
           <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="3">
-                <Column editable="false" title="ID" type="java.lang.Object">
-                  <Data value="1"/>
-                  <Data value="2"/>
-                  <Data value="3"/>
-                </Column>
-                <Column editable="false" title="NOM" type="java.lang.Object">
-                  <Data value="afa"/>
-                  <Data value="fsfq"/>
-                  <Data value="fsfq"/>
-                </Column>
-                <Column editable="false" title="RUE" type="java.lang.Object">
-                  <Data value="faf"/>
-                  <Data value="fsq"/>
-                  <Data value="fsfq"/>
-                </Column>
-                <Column editable="false" title="CP" type="java.lang.Object">
-                  <Data value="fsf"/>
-                  <Data value="fs"/>
-                  <Data value="null"/>
-                </Column>
-                <Column editable="false" title="VILLE" type="java.lang.Object"/>
-              </Table>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;    },&#xa;    new String [] {&#xa;        &quot;ID&quot;, &quot;NOM&quot;, &quot;RUE&quot;, &quot;CP&quot;, &quot;VILLE&quot;&#xa;    }&#xa;) {&#xa;    boolean[] canEdit = new boolean [] {&#xa;        false, false, false, false, false&#xa;    };&#xa;&#xa;    public boolean isCellEditable(int rowIndex, int columnIndex) {&#xa;        return canEdit [columnIndex];&#xa;    }&#xa;}" type="code"/>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">

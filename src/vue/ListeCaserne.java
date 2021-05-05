@@ -9,6 +9,7 @@ import DAO.CaserneDAO;
 import DAO.ConnexionBdd;
 import java.sql.Connection;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import modele.Caserne;
 import modele.Compte;
 
@@ -27,36 +28,24 @@ public class ListeCaserne extends javax.swing.JFrame {
     public ListeCaserne() {
         initComponents();
         
-        String[][] tableau = {};
+
         Connection cnt =  ConnexionBdd.ouvrirConnexion();
         ArrayList<Caserne> lesCasernes = CaserneDAO.getLesCasernes(cnt);
         
+        System.out.println(lesCasernes.size());
+        
+        DefaultTableModel model =  new DefaultTableModel(new String[]{"ID", "NOM", "RUE", "CP", "VILLE"}, 1);
+        
+        
+        jTable.setModel(model);
         for(int i = 0; i < lesCasernes.size(); i++){
             Caserne uneCaserne = lesCasernes.get(i) ;
-            tableau[][] = {
-                String.valueOf(uneCaserne.getId()),
-                uneCaserne.getNom(),
-                uneCaserne.getRue(),
-                uneCaserne.getCp(),
-                uneCaserne.getVille()
-            }
+            System.out.println(String.valueOf(uneCaserne.getId()) + uneCaserne.getNom() + uneCaserne.getRue() + uneCaserne.getCp() + uneCaserne.getVille());
+            model.addRow(new Object[] { String.valueOf(uneCaserne.getId()), uneCaserne.getNom(), uneCaserne.getRue(), uneCaserne.getCp(), uneCaserne.getVille()});
+
         }
-
         
-        jTable.setModel(new javax.swing.table.DefaultTableModel(
-            tableau,
-            new String [] {
-                "ID", "NOM", "RUE", "CP", "VILLE"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        }); 
+        System.out.println(lesCasernes);
         
         
     }
@@ -65,7 +54,25 @@ public class ListeCaserne extends javax.swing.JFrame {
     public ListeCaserne(Compte unCompte) {
         initComponents();
         
-        leCompte = unCompte;
+ 
+        
+        Connection cnt =  ConnexionBdd.ouvrirConnexion();
+        ArrayList<Caserne> lesCasernes = CaserneDAO.getLesCasernes(cnt);
+        
+        System.out.println(lesCasernes.size());
+        
+        DefaultTableModel model =  new DefaultTableModel(new String[]{"ID", "NOM", "RUE", "CP", "VILLE"}, 1);
+        
+        
+        jTable.setModel(model);
+        for(int i = 0; i < lesCasernes.size(); i++){
+            Caserne uneCaserne = lesCasernes.get(i) ;
+            System.out.println(String.valueOf(uneCaserne.getId()) + uneCaserne.getNom() + uneCaserne.getRue() + uneCaserne.getCp() + uneCaserne.getVille());
+            model.addRow(new Object[] { String.valueOf(uneCaserne.getId()), uneCaserne.getNom(), uneCaserne.getRue(), uneCaserne.getCp(), uneCaserne.getVille()});
+
+        }
+        
+        System.out.println(lesCasernes);
     }
     
 
@@ -124,9 +131,6 @@ public class ListeCaserne extends javax.swing.JFrame {
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "afa", "faf", "fsf", null},
-                {"2", "fsfq", "fsq", "fs", null},
-                {"3", "fsfq", "fsfq", null, null}
             },
             new String [] {
                 "ID", "NOM", "RUE", "CP", "VILLE"
