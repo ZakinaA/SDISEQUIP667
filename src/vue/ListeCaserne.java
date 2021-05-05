@@ -9,6 +9,7 @@ import DAO.CaserneDAO;
 import DAO.ConnexionBdd;
 import java.sql.Connection;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import modele.Caserne;
 import modele.Compte;
 
@@ -19,6 +20,8 @@ import modele.Compte;
 public class ListeCaserne extends javax.swing.JFrame {
     
     Compte leCompte;
+    Caserne laCaserne;
+    Connection cnt;
     
 
     /**
@@ -27,36 +30,24 @@ public class ListeCaserne extends javax.swing.JFrame {
     public ListeCaserne() {
         initComponents();
         
-        String[][] tableau = {};
+
         Connection cnt =  ConnexionBdd.ouvrirConnexion();
         ArrayList<Caserne> lesCasernes = CaserneDAO.getLesCasernes(cnt);
         
+        System.out.println(lesCasernes.size());
+        
+        DefaultTableModel model =  new DefaultTableModel(new String[]{"ID", "NOM", "RUE", "CP", "VILLE"}, 1);
+        
+        
+        jTable.setModel(model);
         for(int i = 0; i < lesCasernes.size(); i++){
             Caserne uneCaserne = lesCasernes.get(i) ;
-            tableau[][] = {
-                String.valueOf(uneCaserne.getId()),
-                uneCaserne.getNom(),
-                uneCaserne.getRue(),
-                uneCaserne.getCp(),
-                uneCaserne.getVille()
-            }
+            System.out.println(String.valueOf(uneCaserne.getId()) + uneCaserne.getNom() + uneCaserne.getRue() + uneCaserne.getCp() + uneCaserne.getVille());
+            model.addRow(new Object[] { String.valueOf(uneCaserne.getId()), uneCaserne.getNom(), uneCaserne.getRue(), uneCaserne.getCp(), uneCaserne.getVille()});
+
         }
-
         
-        jTable.setModel(new javax.swing.table.DefaultTableModel(
-            tableau,
-            new String [] {
-                "ID", "NOM", "RUE", "CP", "VILLE"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        }); 
+        System.out.println(lesCasernes);
         
         
     }
@@ -65,7 +56,22 @@ public class ListeCaserne extends javax.swing.JFrame {
     public ListeCaserne(Compte unCompte) {
         initComponents();
         
-        leCompte = unCompte;
+        Connection cnt =  ConnexionBdd.ouvrirConnexion();
+        ArrayList<Caserne> lesCasernes = CaserneDAO.getLesCasernes(cnt);
+        
+        System.out.println(lesCasernes.size());
+        
+        DefaultTableModel model =  new DefaultTableModel(new String[]{"ID", "NOM", "RUE", "CP", "VILLE"}, 1);
+        
+        jTable.setModel(model);
+        for(int i = 0; i < lesCasernes.size(); i++){
+            Caserne uneCaserne = lesCasernes.get(i) ;
+            System.out.println(String.valueOf(uneCaserne.getId()) + uneCaserne.getNom() + uneCaserne.getRue() + uneCaserne.getCp() + uneCaserne.getVille());
+            model.addRow(new Object[] { String.valueOf(uneCaserne.getId()), uneCaserne.getNom(), uneCaserne.getRue(), uneCaserne.getCp(), uneCaserne.getVille()});
+
+        }
+        
+        System.out.println(lesCasernes);
     }
     
 
@@ -101,10 +107,10 @@ public class ListeCaserne extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/barre.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 720, 60));
 
-        jLabel4.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Reem Kufi", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 204, 204));
-        jLabel4.setText("Liste des casernes");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 300, 90));
+        jLabel4.setText("Liste Casernes");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 240, -1));
 
         jButton6.setText("AJOUTER");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -124,22 +130,12 @@ public class ListeCaserne extends javax.swing.JFrame {
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "afa", "faf", "fsf", null},
-                {"2", "fsfq", "fsq", "fs", null},
-                {"3", "fsfq", "fsfq", null, null}
+
             },
             new String [] {
                 "ID", "NOM", "RUE", "CP", "VILLE"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jTable.getTableHeader().setReorderingAllowed(false);
         jTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -185,7 +181,20 @@ public class ListeCaserne extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
-        System.out.println(jTable.getValueAt(jTable.getSelectedRow(), 0).toString());
+        
+        if(jTable.getValueAt(jTable.getSelectedRow(), 0) != null){
+            
+            int id = Integer.parseInt((String) jTable.getValueAt(jTable.getSelectedRow(), 0));
+            
+            //GetCaserne
+            cnt = ConnexionBdd.ouvrirConnexion();
+            laCaserne = CaserneDAO.getCaserneById(cnt, id);
+            
+            //GoToPage
+            new CaserneVue(leCompte, laCaserne, "listecaserne").setVisible(true);
+            this.setVisible(false);
+            //System.out.println(jTable.getValueAt(jTable.getSelectedRow(), 0).toString());
+        }
     }//GEN-LAST:event_jTableMouseClicked
 
     /**
@@ -213,8 +222,38 @@ public class ListeCaserne extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ListeCaserne.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
-
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         

@@ -88,7 +88,7 @@ public class CaserneDAO {
 
         public static ArrayList<Caserne> getLesCasernes(Connection connection){
         
-            ArrayList<Caserne> lesCasernes = null;
+            ArrayList<Caserne> lesCasernes = new ArrayList<Caserne>();
 
 
             try {

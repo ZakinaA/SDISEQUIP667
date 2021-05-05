@@ -5,17 +5,35 @@
  */
 package vue;
 
+import java.sql.Connection;
+import modele.Caserne;
+import modele.Compte;
+
 /**
  *
  * @author ts1sio
  */
 public class Engins extends javax.swing.JFrame {
+    
+    Caserne laCaserne;
+    Connection cnt;
+    Compte leCompte;
+    String laProvenance;
 
     /**
      * Creates new form Accueil
      */
     public Engins() {
         initComponents();
+    }
+    
+    public Engins(Compte unCompte, Caserne uneCaserne, String uneProvenance) {
+        initComponents();
+        
+        leCompte = unCompte;
+        laCaserne = uneCaserne;
+        laProvenance = uneProvenance;
+        
     }
 
     /**
@@ -59,7 +77,7 @@ public class Engins extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new CaserneVue().setVisible(true);
+        new CaserneVue(leCompte, laCaserne, laProvenance).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

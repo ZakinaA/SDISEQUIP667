@@ -158,7 +158,7 @@ public class MenuSalarie extends javax.swing.JFrame {
         if(leType.equals("a")){
             new ListeCaserne(leCompte).setVisible(true);
         }else if(leType.equals("s")){
-            new CaserneVue(leCompte, laCaserne).setVisible(true);
+            new CaserneVue(leCompte, laCaserne, "accueil").setVisible(true);
         }
         
         this.setVisible(false);

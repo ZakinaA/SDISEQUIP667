@@ -53,16 +53,16 @@
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Reem Kufi" size="24" style="0"/>
+          <Font name="Reem Kufi" size="36" style="0"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cc" green="cc" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Liste des casernes"/>
+        <Property name="text" type="java.lang.String" value="Liste Casernes"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="30" y="40" width="300" height="90"/>
+          <AbsoluteConstraints x="20" y="50" width="240" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -107,28 +107,12 @@
         <Component class="javax.swing.JTable" name="jTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="3">
-                <Column editable="false" title="ID" type="java.lang.Object">
-                  <Data value="1"/>
-                  <Data value="2"/>
-                  <Data value="3"/>
-                </Column>
-                <Column editable="false" title="NOM" type="java.lang.Object">
-                  <Data value="afa"/>
-                  <Data value="fsfq"/>
-                  <Data value="fsfq"/>
-                </Column>
-                <Column editable="false" title="RUE" type="java.lang.Object">
-                  <Data value="faf"/>
-                  <Data value="fsq"/>
-                  <Data value="fsfq"/>
-                </Column>
-                <Column editable="false" title="CP" type="java.lang.Object">
-                  <Data value="fsf"/>
-                  <Data value="fs"/>
-                  <Data value="null"/>
-                </Column>
-                <Column editable="false" title="VILLE" type="java.lang.Object"/>
+              <Table columnCount="5" rowCount="0">
+                <Column editable="true" title="ID" type="java.lang.Object"/>
+                <Column editable="true" title="NOM" type="java.lang.Object"/>
+                <Column editable="true" title="RUE" type="java.lang.Object"/>
+                <Column editable="true" title="CP" type="java.lang.Object"/>
+                <Column editable="true" title="VILLE" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

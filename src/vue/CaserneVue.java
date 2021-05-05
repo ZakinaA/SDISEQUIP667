@@ -16,6 +16,7 @@ public class CaserneVue extends javax.swing.JFrame {
     
     Compte leCompte;
     Caserne laCaserne;
+    String laProvenance;
 
     /**
      * Creates new form Accueil
@@ -25,11 +26,12 @@ public class CaserneVue extends javax.swing.JFrame {
     }
 
     
-    public CaserneVue(Compte unCompte, Caserne uneCaserne){
+    public CaserneVue(Compte unCompte, Caserne uneCaserne, String provenance){
         initComponents();
         
         leCompte = unCompte;
         laCaserne = uneCaserne;
+        laProvenance = provenance;
         
         //SET NAME
         j_nom.setText(String.valueOf(laCaserne.getNom().toUpperCase()));
@@ -61,7 +63,7 @@ public class CaserneVue extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("ACCUEIL");
+        jButton1.setText("RETOUR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -124,21 +126,27 @@ public class CaserneVue extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(leCompte.getLeType().equals("s")){
-            new MenuSalarie(leCompte).setVisible(true);
-        }else if(leCompte.getLeType().equals("a")){
-            new MenuAdmin(leCompte).setVisible(true);
-        }
+        if(laProvenance.equals("listecaserne")){
+                new ListeCaserne(leCompte).setVisible(true);
+        }else if(laProvenance.equals("accueil")){
+            if(leCompte.getLeType().equals("s")){
+                new MenuSalarie(leCompte).setVisible(true);
+            }else if(leCompte.getLeType().equals("a")){
+                new MenuAdmin(leCompte).setVisible(true);
+            }
+        } 
+
+        
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        new Engins().setVisible(true);
+        new Engins(leCompte, laCaserne, laProvenance).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        new Pompiers(laCaserne).setVisible(true);
+        new Pompiers(leCompte, laCaserne, laProvenance).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
