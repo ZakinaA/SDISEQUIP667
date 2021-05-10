@@ -10,6 +10,7 @@ import DAO.interventionDAO;
 import java.sql.Connection;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import modele.Compte;
 import modele.Intervention;
 import modele.Pompier;
 
@@ -22,6 +23,7 @@ public class ListeInter extends javax.swing.JFrame {
     
     Connection cnt;
     String laProvenance;
+    Compte leCompte;
 
     /**
      * Creates new form Accueil
@@ -32,11 +34,12 @@ public class ListeInter extends javax.swing.JFrame {
         initComponents();
     }
 
-   public ListeInter(Pompier lePompier, String uneProvenance) {
+   public ListeInter(Compte unCompte, Pompier lePompier, String uneProvenance) {
         initComponents();
        
         Connection cnt =  ConnexionBdd.ouvrirConnexion();
         laProvenance = uneProvenance;
+        leCompte = unCompte;
         
         ArrayList<Intervention> lesInterventions = interventionDAO.getLesInterventionsByPompierID(cnt, lePompier.getPom_id()
         );
@@ -138,7 +141,15 @@ public class ListeInter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new Profil().setVisible(true);
+        if(laProvenance.equals("x")){
+                //new ListeCaserne(leCompte).setVisible(true);
+        }else if(laProvenance.equals("accueil")){
+            if(leCompte.getLeType().equals("s")){
+                new MenuSalarie(leCompte).setVisible(true);
+            }else if(leCompte.getLeType().equals("a")){
+                new MenuAdmin(leCompte).setVisible(true);
+            }
+        } 
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -164,7 +164,7 @@ public class ListeCaserne extends javax.swing.JFrame {
 
     
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        new AddCaserne().setVisible(true);
+        new AddCaserne(leCompte).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 

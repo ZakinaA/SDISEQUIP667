@@ -9,6 +9,7 @@ import DAO.CaserneDAO;
 import DAO.ConnexionBdd;
 import static java.lang.System.console;
 import java.sql.Connection;
+import modele.Compte;
 
 /**
  *
@@ -17,12 +18,20 @@ import java.sql.Connection;
 public class AddCaserne extends javax.swing.JFrame {
     
     Connection cnt;
+    Compte leCompte;
 
     /**
      * Creates new form Accueil
      */
     public AddCaserne() {
         initComponents();
+    }
+    
+    public AddCaserne(Compte unCompte) {
+        initComponents();
+        
+        leCompte = unCompte;
+        
     }
 
     /**
@@ -123,7 +132,7 @@ public class AddCaserne extends javax.swing.JFrame {
     }//GEN-LAST:event_j_nomActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        new ListeCaserne().setVisible(true);
+        new ListeCaserne(leCompte).setVisible(true);
         this.setVisible(false);       // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 

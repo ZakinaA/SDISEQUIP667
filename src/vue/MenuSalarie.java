@@ -150,9 +150,8 @@ public class MenuSalarie extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(leType.equals("a")){
-            new ListeInter(lePompier, "accueil").setVisible(true);
-        }
+            new ListeInter(leCompte, lePompier, "accueil").setVisible(true);
+            this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
