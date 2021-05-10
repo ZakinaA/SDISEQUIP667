@@ -245,3 +245,9 @@ public class MenuResponsable extends javax.swing.JFrame {
     private javax.swing.JLabel j_prename;
     // End of variables declaration//GEN-END:variables
 }
+
+
+
+
+
+

@@ -269,3 +269,9 @@ public class MenuSalarie extends javax.swing.JFrame {
     private javax.swing.JButton quitButton;
     // End of variables declaration//GEN-END:variables
 }
+
+
+
+
+
+
