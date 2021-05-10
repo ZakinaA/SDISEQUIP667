@@ -67,13 +67,14 @@ public class MenuAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
+        quitButton = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         j_prename = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         j_name = new javax.swing.JLabel();
@@ -82,14 +83,19 @@ public class MenuAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/utilisateur.png"))); // NOI18N
-        jButton2.setText("PROFIL");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        quitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/key.png"))); // NOI18N
+        quitButton.setText("Quitter");
+        quitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                quitButtonMouseClicked(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, -1));
+        quitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(quitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 120, -1));
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/clients.png"))); // NOI18N
         jButton4.setText("LISTE DES POMPIERS");
@@ -135,6 +141,15 @@ public class MenuAdmin extends javax.swing.JFrame {
         });
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 390, 80));
 
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/utilisateur.png"))); // NOI18N
+        jButton7.setText("PROFIL");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, -1));
+
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/barre.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 720, 60));
 
@@ -155,21 +170,10 @@ public class MenuAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        cnt = ConnexionBdd.ouvrirConnexion();
-        
-        int isVolontaire = VolontaireDAO.isVolontaire(cnt, leMatricule);
-        if(isVolontaire == 1){
-            Volontaire leVolontaire = VolontaireDAO.getVolontaire(cnt, leMatricule);
-            Profession laProfession = ProfessionDAO.getProfession(cnt, leVolontaire.getProfessionId());
-            new Profil(leCompte ,lePompier, leVolontaire, laProfession).setVisible(true);
-        }else{
-            Professionnel leProfessionnel = ProfessionnelDAO.getProfessionnel(cnt, leMatricule);
-            new Profil(leCompte, lePompier, leProfessionnel).setVisible(true);
-        }
+    private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
+        System.exit(0);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_quitButtonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
             new ListeInter(leCompte, lePompier, "accueil").setVisible(true);
@@ -190,6 +194,14 @@ public class MenuAdmin extends javax.swing.JFrame {
                 new ListeCaserne(leCompte).setVisible(true);    
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void quitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quitButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quitButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -229,16 +241,17 @@ public class MenuAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel j_name;
     private javax.swing.JLabel j_prename;
+    private javax.swing.JButton quitButton;
     // End of variables declaration//GEN-END:variables
 }
