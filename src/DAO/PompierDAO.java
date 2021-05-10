@@ -98,4 +98,39 @@ public class PompierDAO {
     
     }
     
+    
+        public static ArrayList<Pompier> getAllPompiers(Connection connection){
+        ArrayList<Pompier> lesPompiers = new ArrayList<Pompier>();
+            try {
+                requete=connection.prepareStatement("SELECT * FROM Pompier");
+               
+                rs=requete.executeQuery();
+                while(rs.next()){  
+                    Pompier lePompier = new Pompier(); 
+                    
+                    lePompier.setPom_id(Integer.valueOf(rs.getString("pom_id")));
+                    lePompier.setPom_prenom(rs.getString("pom_prenom"));
+                    lePompier.setPom_nom(rs.getString("pom_nom"));
+                    lePompier.setPom_dateNaissance(rs.getString("pom_datenaissance"));
+                    lePompier.setPom_numeroBip(Integer.valueOf(rs.getString("pom_numerobip")));
+                    lePompier.setPom_sexe(rs.getString("pom_sexe"));
+                    lePompier.setPom_telephone(rs.getString("pom_telephone"));
+                    
+                    lesPompiers.add(lePompier);
+                    
+                }
+
+                
+                    
+                
+                    ConnexionBdd.fermerConnexion(rs);
+                    ConnexionBdd.fermerConnexion(requete); 
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            return lesPompiers;
+    
+    }
+    
 }

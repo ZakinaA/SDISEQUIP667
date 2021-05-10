@@ -40,7 +40,7 @@ public class interventionDAO {
                     
                     Intervention uneIntervention = new Intervention ();
                     uneIntervention.setId(rs.getInt("INT_ID"));
-                    uneIntervention.setAdresse(rs.getString("INT_ADRESSE"));
+                    uneIntervention.setAdresse(rs.getString("INT_LIEU"));
                     uneIntervention.setDuree(rs.getTime("INT_DUREE"));
                     uneIntervention.setHeureAppel(rs.getTime("INT_HEUREAPPEL"));
                     uneIntervention.setDate(rs.getDate("INT_DATE"));
@@ -85,7 +85,7 @@ public class interventionDAO {
                 rs=requete.executeQuery();
                 if (rs.next()){
                     lesInterventions.setId(Integer.parseInt(rs.getString("INT_ID")));
-                    lesInterventions.setAdresse(rs.getString("INT_ADRESSE"));
+                    lesInterventions.setAdresse(rs.getString("INT_LIEU"));
                     lesInterventions.setCp(rs.getString("INT_CP"));
                     lesInterventions.setVille(rs.getString("INT_VILLE"));
                     lesInterventions.setDate(rs.getDate("INT_DATE"));

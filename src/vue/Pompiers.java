@@ -33,6 +33,36 @@ public class Pompiers extends javax.swing.JFrame {
         initComponents();
     }
     
+    public Pompiers(Compte unCompte, String uneProvenance) {
+        initComponents();
+        
+        jLabel1.setText("");
+        j_casnom.setText("");
+        
+        
+        leCompte = unCompte;
+        laProvenance = uneProvenance;
+        
+        
+        //GET LES POMPIERS
+        cnt = ConnexionBdd.ouvrirConnexion();
+        ArrayList<Pompier> lesPompiers = PompierDAO.getAllPompiers(cnt);
+        
+        System.out.println(lesPompiers);
+        
+        DefaultTableModel model =  new DefaultTableModel(new String[]{"ID", "NOM", "PRENOM", "CASERNE"}, 1);
+        
+        
+        jTable.setModel(model);
+        for(int i = 0; i < lesPompiers.size(); i++){
+            Pompier unPompier = lesPompiers.get(i) ;
+           // System.out.println(String.valueOf(unPompier.getPom_id()) + unPompier.getPom_nom() + unPompier.getPom_prenom()+ unPompier.getLaCaserne().getId());
+            model.addRow(new Object[] { String.valueOf(unPompier.getPom_id()) , unPompier.getPom_nom() , unPompier.getPom_prenom(), "A AJOUTER"});
+
+        }
+        
+    }
+    
     public Pompiers(Compte unCompte, Caserne uneCaserne, String uneProvenance) {
         initComponents();
         
