@@ -53,6 +53,7 @@ public class MenuResponsable extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        quitButton = new javax.swing.JButton();
         j_prename = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -87,6 +88,20 @@ public class MenuResponsable extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 150, -1));
+
+        quitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/key.png"))); // NOI18N
+        quitButton.setText("Quitter");
+        quitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                quitButtonMouseClicked(evt);
+            }
+        });
+        quitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(quitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 120, -1));
 
         j_prename.setFont(new java.awt.Font("Reem Kufi", 0, 22)); // NOI18N
         j_prename.setForeground(new java.awt.Color(255, 204, 204));
@@ -132,6 +147,15 @@ public class MenuResponsable extends javax.swing.JFrame {
         new CaserneVue().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void quitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quitButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quitButtonMouseClicked
+
+    private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
+        new Connexion().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_quitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,5 +267,6 @@ public class MenuResponsable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel j_name;
     private javax.swing.JLabel j_prename;
+    private javax.swing.JButton quitButton;
     // End of variables declaration//GEN-END:variables
 }
