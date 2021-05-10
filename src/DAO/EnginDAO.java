@@ -6,11 +6,12 @@
 package DAO;
 
 import static DAO.EnginTypeDAO.requete;
+import static DAO.interventionDAO.rs;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.ArrayList;
 import modele.Caserne;
 import modele.Engin;
@@ -69,12 +70,12 @@ public class EnginDAO {
                    if(rs.next()){
                        Intervention uneIntervention = new Intervention();
                        uneIntervention.setId(Integer.parseInt(rs.getString("int_id")));
-                       uneIntervention.setDuree(Date.valueOf(rs.getString("int_duree")));
+                       uneIntervention.setDuree(rs.getTime("int_duree"));
                        uneIntervention.setAdresse(rs.getString("int_lieu"));
                        uneIntervention.setCp(rs.getString("int_cp"));
                        uneIntervention.setVille(rs.getString("int_ville"));
-                       uneIntervention.setHeureAppel(Date.valueOf(rs.getString("int_heureappel")));
-                       uneIntervention.setDate(Date.valueOf(rs.getString("int_date")));
+                       uneIntervention.setHeureAppel(rs.getTime("int_heureappel"));
+                       uneIntervention.setDate(rs.getDate("int_date"));
                        
                        
                        lesInterventions.add(uneIntervention);

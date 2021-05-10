@@ -37,11 +37,15 @@ public class Interventions extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        j_lieu = new javax.swing.JTextField();
+        j_ville = new javax.swing.JTextField();
         j_duree = new javax.swing.JTextField();
         j_heure = new javax.swing.JTextField();
         j_date = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
+        j_cp = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        j_rue = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         jList2.setModel(new javax.swing.AbstractListModel<String>() {
@@ -54,7 +58,7 @@ public class Interventions extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setText("lieux de l'inervention :");
+        jLabel4.setText("ville intervention");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Reem Kufi", 0, 30)); // NOI18N
@@ -82,12 +86,12 @@ public class Interventions extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/barre.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 720, 60));
 
-        j_lieu.addActionListener(new java.awt.event.ActionListener() {
+        j_ville.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                j_lieuActionPerformed(evt);
+                j_villeActionPerformed(evt);
             }
         });
-        getContentPane().add(j_lieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 100, -1));
+        getContentPane().add(j_ville, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 100, -1));
         getContentPane().add(j_duree, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 100, -1));
         getContentPane().add(j_heure, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, 100, -1));
         getContentPane().add(j_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 100, -1));
@@ -98,7 +102,27 @@ public class Interventions extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, -1, -1));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 460, -1, -1));
+
+        j_cp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j_cpActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j_cp, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 320, 100, -1));
+
+        jLabel8.setText("CP intervnention");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
+
+        jLabel9.setText("adresse intervention");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, -1, -1));
+
+        j_rue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j_rueActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j_rue, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 370, 100, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/fond.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
@@ -107,9 +131,9 @@ public class Interventions extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void j_lieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j_lieuActionPerformed
+    private void j_villeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j_villeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_j_lieuActionPerformed
+    }//GEN-LAST:event_j_villeActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         new ListeInter().setVisible(true);
@@ -119,6 +143,14 @@ public class Interventions extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void j_cpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j_cpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j_cpActionPerformed
+
+    private void j_rueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j_rueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j_rueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,11 +229,15 @@ public class Interventions extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField j_cp;
     private javax.swing.JTextField j_date;
     private javax.swing.JTextField j_duree;
     private javax.swing.JTextField j_heure;
-    private javax.swing.JTextField j_lieu;
+    private javax.swing.JTextField j_rue;
+    private javax.swing.JTextField j_ville;
     // End of variables declaration//GEN-END:variables
 }

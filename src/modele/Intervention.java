@@ -5,6 +5,8 @@
  */
 package modele;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,16 +21,21 @@ public class Intervention {
     private String cp;
     private String ville;
     private Date date;
-    private Date heureAppel;
-    private Date duree;
+    private Time heureAppel;
+    private Time duree;
+    private Type unTypeIntervention; 
+    
     
     private ArrayList<Engin> lesEngins;
     private ArrayList<Pompier> lesPompiers;
+    
+    
+
 
     public Intervention() {
     }
 
-    public Intervention(int id, String adresse, String cp, String ville, Date date, Date heureAppel, Date duree) {
+    public Intervention(int id, String adresse, String cp, String ville, Date date, Time heureAppel, Time duree) {
         this.id = id;
         this.adresse = adresse;
         this.cp = cp;
@@ -58,11 +65,11 @@ public class Intervention {
         return date;
     }
 
-    public Date getHeureAppel() {
+    public Time getHeureAppel() {
         return heureAppel;
     }
 
-    public Date getDuree() {
+    public Time getDuree() {
         return duree;
     }
 
@@ -70,6 +77,11 @@ public class Intervention {
         return lesEngins;
     }
 
+    public Type getUnTypeIntervention() {
+        return unTypeIntervention;
+    }
+    
+   
     
     
     
@@ -96,16 +108,20 @@ public class Intervention {
         this.date = date;
     }
 
-    public void setHeureAppel(Date heureAppel) {
+    public void setHeureAppel(Time heureAppel) {
         this.heureAppel = heureAppel;
     }
 
-    public void setDuree(Date duree) {
+    public void setDuree(Time duree) {
         this.duree = duree;
     }
 
     public void setLesEngins(ArrayList<Engin> lesEngins) {
         this.lesEngins = lesEngins;
+    }
+
+    public void setUnTypeIntervention(Type unTypeIntervention) {
+        this.unTypeIntervention = unTypeIntervention;
     }
     
     
