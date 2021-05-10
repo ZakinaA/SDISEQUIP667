@@ -54,7 +54,7 @@ public class Pompiers extends javax.swing.JFrame {
         for(int i = 0; i < lesPompiers.size(); i++){
             Pompier unPompier = lesPompiers.get(i) ;
            // System.out.println(String.valueOf(unPompier.getPom_id()) + unPompier.getPom_nom() + unPompier.getPom_prenom()+ unPompier.getLaCaserne().getId());
-            model.addRow(new Object[] { String.valueOf(unPompier.getPom_id()) , unPompier.getPom_nom() , unPompier.getPom_prenom(), unPompier.getPom_prenom()});
+            model.addRow(new Object[] { String.valueOf(unPompier.getPom_id()) , unPompier.getPom_nom() , unPompier.getPom_prenom(), "A AJOUTER"});
 
         }
         
