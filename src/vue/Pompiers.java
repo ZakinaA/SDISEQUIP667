@@ -175,7 +175,11 @@ public class Pompiers extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new CaserneVue(leCompte, laCaserne, laProvenance).setVisible(true);
+        if(laProvenance.equals("accueil")){
+            new MenuAdmin(leCompte).setVisible(true);
+        }else if(laProvenance.equals("caserne")){
+            new CaserneVue(leCompte, laCaserne, "accueil").setVisible(true);
+        }
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -58,6 +58,30 @@ public class ListeInter extends javax.swing.JFrame {
         
         System.out.println(lesInterventions);
     }
+   
+      public ListeInter(Compte unCompte, String uneProvenance) {
+        initComponents();
+       
+        Connection cnt =  ConnexionBdd.ouvrirConnexion();
+        laProvenance = uneProvenance;
+        leCompte = unCompte;
+        
+        ArrayList<Intervention> lesInterventions = interventionDAO.getLesInterventions(cnt);
+        
+        System.out.println(lesInterventions.size());
+        
+        DefaultTableModel model =  new DefaultTableModel(new String[]{"numero", "adresse", "heure appel", "date", "duree"}, 1);
+        
+        
+        jTable1.setModel(model);
+        for(int i = 0; i < lesInterventions.size(); i++){
+            Intervention uneIntervention = lesInterventions.get(i) ;
+            model.addRow(new Object[] { String.valueOf(uneIntervention.getId()), uneIntervention.getAdresse(),uneIntervention.getHeureAppel() , uneIntervention.getDate(), uneIntervention.getDuree()});
+
+        }
+        
+        System.out.println(lesInterventions);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

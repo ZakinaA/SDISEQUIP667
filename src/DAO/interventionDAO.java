@@ -109,7 +109,7 @@ public class interventionDAO {
         Intervention uneIntervention = new Intervention();
         
         try{
-            requete=connection.prepareStatement("INSERT INTO `intervention` (`INT_VILLE`, `INT_DATE`, `INT_HEUREAPPEL`, `INT_DUREE`, `INT_Adresse`, `INT_CP`) VALUES ('?', '?', '?', '?', '?', '?', '?', '?'); " );    
+            requete=connection.prepareStatement("INSERT INTO `intervention` (`INT_DATE`, `INT_HEUREAPPEL`, `INT_DUREE`, `INT_LIEU`) VALUES ('?', '?', '?', '?'); " );    
             requete.setString(1, String.valueOf(id));
             
         

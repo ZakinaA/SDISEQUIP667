@@ -184,7 +184,7 @@ public class MenuSalarie extends javax.swing.JFrame {
     }//GEN-LAST:event_quitButtonMouseClicked
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
-        new Connexion().setVisible(true);
+        System.exit(0);
         this.setVisible(false);
     }//GEN-LAST:event_quitButtonActionPerformed
 

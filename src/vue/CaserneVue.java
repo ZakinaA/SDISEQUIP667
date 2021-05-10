@@ -146,7 +146,7 @@ public class CaserneVue extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        new Pompiers(leCompte, laCaserne, laProvenance).setVisible(true);
+        new Pompiers(leCompte, laCaserne, "caserne").setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
