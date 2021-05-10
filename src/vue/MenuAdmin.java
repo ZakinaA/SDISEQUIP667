@@ -171,7 +171,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
-        System.exit(0);
+        System.exit(0);  
         this.setVisible(false);
     }//GEN-LAST:event_quitButtonActionPerformed
 

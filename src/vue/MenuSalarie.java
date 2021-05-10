@@ -30,7 +30,7 @@ public class MenuSalarie extends javax.swing.JFrame {
     Compte leCompte;
     Pompier lePompier;
     Caserne laCaserne;
-
+    
     /**
      * Creates new form Accueil
      */
