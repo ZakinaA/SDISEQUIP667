@@ -72,6 +72,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        quitButton = new javax.swing.JButton();
         j_prename = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
@@ -112,6 +113,15 @@ public class MenuAdmin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 180, -1));
+
+        quitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/key.png"))); // NOI18N
+        quitButton.setText("QUITTER");
+        quitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(quitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 120, -1));
 
         j_prename.setFont(new java.awt.Font("Reem Kufi", 0, 22)); // NOI18N
         j_prename.setForeground(new java.awt.Color(255, 204, 204));
@@ -170,7 +180,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
-        System.exit(0);  
+        new Connexion().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_quitButtonActionPerformed
 
@@ -274,6 +284,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JLabel j_name;
     private javax.swing.JLabel j_prename;
+    private javax.swing.JButton quitButton;
     // End of variables declaration//GEN-END:variables
 }
 
