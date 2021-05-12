@@ -7,9 +7,13 @@ package vue;
 import modele.Caserne;
 import DAO.CaserneDAO;
 import DAO.ConnexionBdd;
+import DAO.GradeDAO;
 import static java.lang.System.console;
 import java.sql.Connection;
+import java.util.ArrayList;
 import modele.Compte;
+import modele.Grade;
+import modele.Pompier;
 
 /**
  *
@@ -19,6 +23,9 @@ public class AddPompier extends javax.swing.JFrame {
     
     Connection cnt;
     Compte leCompte;
+    ArrayList<Caserne> lesCasernes;
+    ArrayList<Grade> lesGrades;
+   
 
     /**
      * Creates new form Accueil
@@ -30,8 +37,32 @@ public class AddPompier extends javax.swing.JFrame {
     public AddPompier(Compte unCompte) {
         initComponents();
         
+        Connection cnt =  ConnexionBdd.ouvrirConnexion();
+        
         leCompte = unCompte;
         
+        lesCasernes = CaserneDAO.getLesCasernes(cnt);
+        lesGrades = GradeDAO.getLesGrades(cnt);
+        
+        for(int i = 0; i < lesCasernes.size(); i++){
+            Caserne uneCaserne = lesCasernes.get(i) ;
+            jCaserne.addItem(uneCaserne.getNom());
+        }
+        
+        for(int i = 0; i < lesGrades.size(); i++){
+            Grade unGrade = lesGrades.get(i) ;
+            jGrade.addItem(unGrade.getLibelle());
+        }
+        
+        //On désactrive les infos de pro/volontaire
+       j_profession.setVisible(false);
+       j_profession_i.setVisible(false);
+       j_ville.setVisible(false);
+       j_ville_i.setVisible(false);
+       j_indice.setVisible(false);
+       j_indice_i.setVisible(false);
+       j_dtindice.setVisible(false);
+       j_dtindice_i.setVisible(false);
     }
 
     /**
@@ -54,11 +85,29 @@ public class AddPompier extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         j_nom = new javax.swing.JTextField();
-        j_rue = new javax.swing.JTextField();
-        j_cp = new javax.swing.JTextField();
-        j_ville = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
+        j_prenom = new javax.swing.JTextField();
+        j_sexe = new javax.swing.JTextField();
+        j_tel = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        j_numbip = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        j_naissance = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jGrade = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jCaserne = new javax.swing.JComboBox<>();
+        jVol = new javax.swing.JRadioButton();
+        j_submit = new javax.swing.JButton();
+        jPro = new javax.swing.JRadioButton();
+        j_dtindice_i = new javax.swing.JTextField();
+        j_dtindice = new javax.swing.JLabel();
+        j_indice = new javax.swing.JLabel();
+        j_indice_i = new javax.swing.JTextField();
+        j_profession_i = new javax.swing.JTextField();
+        j_profession = new javax.swing.JLabel();
+        j_ville_i = new javax.swing.JTextField();
+        j_ville = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         jList2.setModel(new javax.swing.AbstractListModel<String>() {
@@ -72,21 +121,21 @@ public class AddPompier extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         j_error.setForeground(new java.awt.Color(255, 51, 51));
-        getContentPane().add(j_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, 420, 20));
+        getContentPane().add(j_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 410, 420, 20));
 
         jLabel1.setFont(new java.awt.Font("Reem Kufi", 0, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 204));
         jLabel1.setText("AJOUTER");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 260, -1));
 
-        jLabel6.setText("CP Caserne :");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, -1, -1));
+        jLabel6.setText("SEXE (H/F/A)");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, -1, -1));
 
-        jLabel5.setText("Rue Caserne :");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, -1, 10));
+        jLabel5.setText("PRENOM");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, -1, 10));
 
-        jLabel7.setText("Ville intervention :");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 270, -1, -1));
+        jLabel7.setText("GRADE");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, -1, -1));
 
         jButton5.setText("RETOUR");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -104,21 +153,82 @@ public class AddPompier extends javax.swing.JFrame {
                 j_nomActionPerformed(evt);
             }
         });
-        getContentPane().add(j_nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 100, -1));
-        getContentPane().add(j_rue, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 100, -1));
-        getContentPane().add(j_cp, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, 100, -1));
-        getContentPane().add(j_ville, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 100, -1));
+        getContentPane().add(j_nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 100, -1));
+        getContentPane().add(j_prenom, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 100, -1));
+        getContentPane().add(j_sexe, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, 100, -1));
+        getContentPane().add(j_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, 100, -1));
 
-        jButton6.setText("Validé");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jLabel8.setText("NOM");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, -1, -1));
+        getContentPane().add(j_numbip, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 100, -1));
+
+        jLabel9.setText("NUMERO BIP");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, -1, 10));
+        getContentPane().add(j_naissance, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 100, -1));
+
+        jLabel10.setText("DATE NAISSANCE");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, -1, 10));
+
+        jGrade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jGradeActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, -1, -1));
+        getContentPane().add(jGrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, -1, -1));
 
-        jLabel8.setText("NOM CASERNE :");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, -1, -1));
+        jLabel11.setText("NUM. TEL");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, -1, -1));
+
+        jLabel12.setText("CASERNE");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
+
+        getContentPane().add(jCaserne, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, -1, -1));
+
+        jVol.setText("Volontaire");
+        jVol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jVolActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jVol, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 310, -1, -1));
+
+        j_submit.setText("Validé");
+        j_submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j_submitActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j_submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 450, -1, -1));
+
+        jPro.setText("Professionnel");
+        jPro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jProActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 310, -1, -1));
+        getContentPane().add(j_dtindice_i, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, 100, -1));
+
+        j_dtindice.setText("Dt obtention");
+        getContentPane().add(j_dtindice, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, -1, -1));
+
+        j_indice.setText("Indice");
+        getContentPane().add(j_indice, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, -1, -1));
+
+        j_indice_i.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j_indice_iActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j_indice_i, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 350, 100, -1));
+        getContentPane().add(j_profession_i, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 350, 100, -1));
+
+        j_profession.setText("Profession");
+        getContentPane().add(j_profession, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, -1, -1));
+        getContentPane().add(j_ville_i, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, 100, -1));
+
+        j_ville.setText("Ville");
+        getContentPane().add(j_ville, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 380, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/fond.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
@@ -136,42 +246,81 @@ public class AddPompier extends javax.swing.JFrame {
         this.setVisible(false);       // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jVolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVolActionPerformed
+       jVol.setSelected(true);
+       jPro.setSelected(false);
+       
+       j_indice.setVisible(false);
+       j_indice_i.setVisible(false);
+       j_dtindice.setVisible(false);
+       j_dtindice_i.setVisible(false);
+       
+       j_profession.setVisible(true);
+       j_profession_i.setVisible(true);
+       j_ville.setVisible(true);
+       j_ville_i.setVisible(true);
+    }//GEN-LAST:event_jVolActionPerformed
+
+    private void jProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProActionPerformed
+       jVol.setSelected(false);
+       jPro.setSelected(true);
+       
+       j_indice.setVisible(true);
+       j_indice_i.setVisible(true);
+       j_dtindice.setVisible(true);
+       j_dtindice_i.setVisible(true);
+       
+       j_profession.setVisible(false);
+       j_profession_i.setVisible(false);
+       j_ville.setVisible(false);
+       j_ville_i.setVisible(false);
+    }//GEN-LAST:event_jProActionPerformed
+
+    private void j_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j_submitActionPerformed
         String nom = String.valueOf(j_nom.getText());
-        String rue = String.valueOf(j_rue.getText());
-        String cp = String.valueOf(j_cp.getText());
-        String ville = String.valueOf(j_ville.getText());
+        String prenom = String.valueOf(j_prenom.getText());
+        String naissance = String.valueOf(j_naissance.getText());
+        String numbip = String.valueOf(j_numbip.getText());
+        String sexe = String.valueOf(j_sexe.getText());
+        String tel = String.valueOf(j_tel.getText());
+        
+        String BoxGrade = (String) jGrade.getSelectedItem();
+        String BoxCaserne = (String) jCaserne.getSelectedItem();
+        
+        if(jVol.isSelected()){
+            String Type = "volontaire";
+            
+            String profession = String.valueOf(j_profession_i.getText());
+            String ville = String.valueOf(j_ville_i.getText());
+        }else if(jPro.isSelected()){
+            String Type = "professionnel";
+            
+            String indice = String.valueOf(j_indice_i.getText());
+            String dtindice = String.valueOf(j_dtindice_i.getText());
+        }else{
+            String Type = "";
+        }
+        
+        Pompier lePompier = new Pompier();   
+        lePompier.setPom_nom(nom);
+        lePompier.setPom_prenom(prenom);
+        lePompier.setPom_dateNaissance(naissance);
+        lePompier.setPom_numeroBip(Integer.parseInt(naissance));
+        lePompier.setPom_sexe(sexe);
+        lePompier.setPom_telephone(tel);
         
         Caserne laCaserne = new Caserne();
         
-        laCaserne.setNom(nom);
-        laCaserne.setRue(rue);
-        laCaserne.setVille(ville);
-        laCaserne.setCp(cp);
         
-        //FONCTION 
-        cnt = ConnexionBdd.ouvrirConnexion();
-        
-        int result = CaserneDAO.AddCaserne(cnt, laCaserne);
-        
-        System.out.println("Résultat");
-        System.out.println(result);
-        
-        if(result != 1){
-            j_error.setText("Erreur dans l'insertion");
-        }else if(result == 1){
-            j_error.setText("Caserne ajoutée");
-            
-            j_nom.setEnabled(false);
-            j_rue.setEnabled(false);
-            j_cp.setEnabled(false);
-            j_ville.setEnabled(false);
-            
-            jButton6.setEnabled(false);
-        }
-        
-        
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_j_submitActionPerformed
+
+    private void jGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGradeActionPerformed
+
+    }//GEN-LAST:event_jGradeActionPerformed
+
+    private void j_indice_iActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j_indice_iActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j_indice_iActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,20 +487,38 @@ public class AddPompier extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox<String> jCaserne;
+    private javax.swing.JComboBox<String> jGrade;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList2;
+    private javax.swing.JRadioButton jPro;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField j_cp;
+    private javax.swing.JRadioButton jVol;
+    private javax.swing.JLabel j_dtindice;
+    private javax.swing.JTextField j_dtindice_i;
     private javax.swing.JLabel j_error;
+    private javax.swing.JLabel j_indice;
+    private javax.swing.JTextField j_indice_i;
+    private javax.swing.JTextField j_naissance;
     private javax.swing.JTextField j_nom;
-    private javax.swing.JTextField j_rue;
-    private javax.swing.JTextField j_ville;
+    private javax.swing.JTextField j_numbip;
+    private javax.swing.JTextField j_prenom;
+    private javax.swing.JLabel j_profession;
+    private javax.swing.JTextField j_profession_i;
+    private javax.swing.JTextField j_sexe;
+    private javax.swing.JButton j_submit;
+    private javax.swing.JTextField j_tel;
+    private javax.swing.JLabel j_ville;
+    private javax.swing.JTextField j_ville_i;
     // End of variables declaration//GEN-END:variables
 }

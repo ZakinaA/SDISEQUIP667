@@ -69,6 +69,12 @@ public class Pompiers extends javax.swing.JFrame {
 
         }
         
+        if(unCompte.getLeType().equals("a")){
+            jButton2.setVisible(true);
+        }else if(unCompte.getLeType().equals("s")){
+            jButton2.setVisible(false);
+        }
+        
     }
     
     public Pompiers(Compte unCompte, Caserne uneCaserne, String uneProvenance) {
@@ -100,6 +106,12 @@ public class Pompiers extends javax.swing.JFrame {
         
         //SET NAME
         j_casnom.setText(String.valueOf(laCaserne.getNom().toUpperCase()));
+        
+        if(unCompte.getLeType().equals("a")){
+            jButton2.setVisible(true);
+        }else if(unCompte.getLeType().equals("s")){
+            jButton2.setVisible(false);
+        }
     }
 
     /**
@@ -111,6 +123,7 @@ public class Pompiers extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -122,6 +135,14 @@ public class Pompiers extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton2.setText("AJOUTER");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
         jButton1.setText("RETOUR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -218,6 +239,11 @@ public class Pompiers extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTableMouseClicked
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new AddPompier(leCompte).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -286,6 +312,7 @@ public class Pompiers extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modele.Grade;
@@ -52,5 +53,31 @@ public class GradeDAO {
             return leGrade;
     
     }
+    
+     public static ArrayList<Grade> getLesGrades(Connection connection){
+        
+            ArrayList<Grade> lesGrades = new ArrayList<Grade>();
+
+
+            try {
+                requete=connection.prepareStatement("SELECT * FROM Grade");
+
+                //executer la reguete
+                rs=requete.executeQuery();
+                while(rs.next()){
+                    Grade unGrade = new Grade();
+                    unGrade.setId(Integer.parseInt(rs.getString("GRA_ID")));
+                    unGrade.setLibelle(rs.getString("GRA_LIBELLE"));
+                    
+
+                    lesGrades.add(unGrade);
+                }
+                    ConnexionBdd.fermerConnexion(rs);
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            return lesGrades; 
+        }
     
 }

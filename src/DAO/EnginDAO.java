@@ -5,7 +5,6 @@
  */
 package DAO;
 
-import static DAO.CaserneDAO.requete;
 import static DAO.EnginTypeDAO.requete;
 import static DAO.interventionDAO.rs;
 import java.sql.Connection;
@@ -119,7 +118,7 @@ public class EnginDAO {
             return resultatUpdate; 
         }
         
-    public static int AddEngin(Connection connection, Engin engin){
+    public static int AddEnginById(Connection connection, Engin engin){
             Engin unEngin = new Engin();
             ArrayList<Intervention> lesInterventions = null;
 
@@ -127,8 +126,8 @@ public class EnginDAO {
             int resultatUpdate = -1;
             try {
                 requete=connection.prepareStatement("INSERT INTO ENGIN (ENGTYP_ID, CAS_ID, ENG_LIBELLE) VALUES (?, ?, ?)");
-                requete.setString(1, String.valueOf(engin.getLeTypeEngin().getId()));
-                requete.setString(2, String.valueOf(engin.getLaCaserne().getId()));
+                requete.setString(1, String.valueOf(engin.getLeTypeEngin()));
+                requete.setString(2, String.valueOf(engin.getLaCaserne()));
                 requete.setString(3, String.valueOf(engin.getLibelle()));
 
                 //executer la reguete
@@ -145,81 +144,6 @@ public class EnginDAO {
             return resultatUpdate; 
         }    
         
-        public static ArrayList<Engin> getLesEngins(Connection connection){
         
-            ArrayList<Engin> lesEngins = new ArrayList<Engin>();
-
-
-            try {
-                requete=connection.prepareStatement("SELECT * FROM ENGIN");
-
-                //executer la reguete
-                rs=requete.executeQuery();
-                while(rs.next()){
-                    Engin unEngin = new Engin();
-                    EnginType unType = new EnginType();
-                    Caserne uneCaserne = new Caserne();
-                    
-                    unType.setId(Integer.valueOf(rs.getString("ENGTYP_ID")));
-                    uneCaserne.setId(Integer.valueOf(rs.getString("CAS_ID")));
-                    
-                    unEngin.setId(Integer.parseInt(rs.getString("ENG_ID")));
-                    unEngin.setLeTypeEngin(unType);
-                    unEngin.setLaCaserne(uneCaserne);
-                    unEngin.setLibelle(rs.getString("ENG_LIBELLE"));
-
-                    
-                    System.out.println(unEngin.getId());
-                    
-
-                    lesEngins.add(unEngin);
-                }
-                    ConnexionBdd.fermerConnexion(rs);
-                    ConnexionBdd.fermerConnexion(requete); 
-            }catch (SQLException e){
-                e.printStackTrace();
-            }
-
-            return lesEngins; 
-        }
         
-        public static ArrayList<Engin> getLesEnginsByIdCaserne(Connection connection, int CaserneId){
-        
-            ArrayList<Engin> lesEngins = new ArrayList<Engin>();
-
-
-            try {
-                requete=connection.prepareStatement("SELECT * FROM ENGIN, CASERNE WHERE engin.CAS_ID = caserne.CAS_ID AND CAS_ID = ?");
-                
-                requete.setString(1, String.valueOf(CaserneId));
-
-                //executer la reguete
-                rs=requete.executeQuery();
-                while(rs.next()){
-                    Engin unEngin = new Engin();
-                    EnginType unType = new EnginType();
-                    Caserne uneCaserne = new Caserne();
-                    
-                    unType.setId(Integer.valueOf(rs.getString("ENGTYP_ID")));
-                    uneCaserne.setId(Integer.valueOf(rs.getString("CAS_ID")));
-                    
-                    unEngin.setId(Integer.parseInt(rs.getString("ENG_ID")));
-                    unEngin.setLeTypeEngin(unType);
-                    unEngin.setLaCaserne(uneCaserne);
-                    unEngin.setLibelle(rs.getString("ENG_LIBELLE"));
-
-                    
-                    System.out.println(unEngin.getId());
-                    
-
-                    lesEngins.add(unEngin);
-                }
-                    ConnexionBdd.fermerConnexion(rs);
-                    ConnexionBdd.fermerConnexion(requete); 
-            }catch (SQLException e){
-                e.printStackTrace();
-            }
-
-            return lesEngins; 
-        }
 }
