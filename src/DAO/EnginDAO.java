@@ -118,7 +118,7 @@ public class EnginDAO {
             return resultatUpdate; 
         }
         
-    public static int AddEnginById(Connection connection, Engin engin){
+    public static int AddEngin(Connection connection, Engin engin){
             Engin unEngin = new Engin();
             ArrayList<Intervention> lesInterventions = null;
 

@@ -42,14 +42,7 @@ public class AddEngin extends javax.swing.JFrame {
         laCaserne = uneCaserne;
         laProvenance = uneProvenance;
         
-        Connection connection =  ConnexionBdd.ouvrirConnexion();
-        ArrayList<EnginType> lesTypes = EnginTypeDAO.getLesTypes(connection);
-        
-        for(int i = 0; i < lesTypes.size(); i++){
-            EnginType unType = lesTypes.get(i) ;
-            jComboBox1.add(unType.getLibelle());
 
-        }
         
         
         
@@ -71,9 +64,9 @@ public class AddEngin extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         messageError = new javax.swing.JLabel();
         enginAddButton = new javax.swing.JButton();
+        enginCaserne1 = new javax.swing.JTextField();
         enginCaserne = new javax.swing.JTextField();
         enginType2 = new javax.swing.JLabel();
         enginName = new javax.swing.JTextField();
@@ -96,9 +89,6 @@ public class AddEngin extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/barre.png"))); // NOI18N
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 720, 60));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, 120, -1));
-
         messageError.setFont(new java.awt.Font("Reem Kufi", 0, 14)); // NOI18N
         messageError.setForeground(new java.awt.Color(255, 204, 204));
         messageError.setText("MESSAGE");
@@ -111,6 +101,13 @@ public class AddEngin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(enginAddButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 460, -1, -1));
+
+        enginCaserne1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enginCaserne1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(enginCaserne1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, 100, -1));
 
         enginCaserne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,7 +151,7 @@ public class AddEngin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new Engins(leCompte, laCaserne, laProvenance, "global").setVisible(true);
+        new Engins(leCompte, laCaserne, laProvenance).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -162,7 +159,7 @@ public class AddEngin extends javax.swing.JFrame {
         
         messageError.setVisible(false);
         Connection connection =  ConnexionBdd.ouvrirConnexion();
-        int type = Integer.valueOf(EnginTypeDAO.getEnginByLibelle(connection, jComboBox1.getSelectedItem().toString()));
+        int type = Integer.valueOf(enginCaserne1.getText());
         int caserne = Integer.valueOf(enginCaserne.getText());
         String libelle = enginName.getText();
         
@@ -204,6 +201,10 @@ public class AddEngin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_enginNameActionPerformed
 
+    private void enginCaserne1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enginCaserne1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enginCaserne1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -243,12 +244,12 @@ public class AddEngin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton enginAddButton;
     private javax.swing.JTextField enginCaserne;
+    private javax.swing.JTextField enginCaserne1;
     private javax.swing.JTextField enginName;
     private javax.swing.JLabel enginType;
     private javax.swing.JLabel enginType1;
     private javax.swing.JLabel enginType2;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

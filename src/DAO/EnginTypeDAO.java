@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modele.EnginType;
 
 /**
@@ -16,6 +17,7 @@ import modele.EnginType;
  * @author ts1sio
  */
 public class EnginTypeDAO {
+
      Connection connection=null;
     static PreparedStatement requete = null;
     static ResultSet rs = null;
@@ -24,7 +26,7 @@ public class EnginTypeDAO {
         public static EnginType getEnginById(Connection connection, int matricule){
             EnginType unEnginType = new EnginType();
             try {
-                requete=connection.prepareStatement("SELECT * FROM ENFINTYPE WHERE ENGTYP_ID = ?");
+                requete=connection.prepareStatement("SELECT * FROM ENGINTYPE WHERE ENGTYP_ID = ?");
                 requete.setString(1, String.valueOf(matricule));
 
                 //executer la reguete
@@ -43,8 +45,30 @@ public class EnginTypeDAO {
             return unEnginType; 
         }
         
-        
-        
+        public static ArrayList<EnginType> getLesTypes(Connection connection){
+            ArrayList<EnginType> lesTypes = new ArrayList<EnginType>();
+
+
+            try {
+                requete=connection.prepareStatement("SELECT * FROM engintype");
+
+                //executer la reguete
+                rs=requete.executeQuery();
+                while(rs.next()){
+                    EnginType untype = new EnginType();
+                    untype.setId(Integer.parseInt(rs.getString("ENGTYP_ID")));
+                    untype.setLibelle(rs.getString("ENGTYP_LIBELLE"));
+
+                    lesTypes.add(untype);
+                }
+                    ConnexionBdd.fermerConnexion(rs);
+                    ConnexionBdd.fermerConnexion(requete); 
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            return lesTypes; 
+        }
         
         public static int AddTypeEngin(Connection connection, String libelle){
             int resultatUpdate = -1;
