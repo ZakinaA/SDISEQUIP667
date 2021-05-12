@@ -5,9 +5,14 @@
  */
 package vue;
 
+import DAO.ConnexionBdd;
+import DAO.EnginDAO;
 import java.sql.Connection;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import modele.Caserne;
 import modele.Compte;
+import modele.Engin;
 
 /**
  *
@@ -34,6 +39,24 @@ public class Engins extends javax.swing.JFrame {
         laCaserne = uneCaserne;
         laProvenance = uneProvenance;
         
+        Connection connexion =  ConnexionBdd.ouvrirConnexion();
+        laProvenance = uneProvenance;
+        leCompte = unCompte;
+        
+        ArrayList<Engin> lesEngins = EnginDAO.getLesEnginsByCaserneID(connexion, laCaserne.getId());
+        
+        System.out.println(lesEngins.size());
+        
+        DefaultTableModel model =  new DefaultTableModel(new String[]{"ID", "TYPE", "LIBELLE"}, 1);
+        
+        
+        jTable1.setModel(model);
+        for(int i = 0; i < lesEngins.size(); i++){
+            Engin unEngin = lesEngins.get(i) ;
+            model.addRow(new Object[] { String.valueOf(unEngin.getId()), unEngin.getLeTypeEngin().getId(),unEngin.getLibelle()});
+
+        }
+        
     }
 
     /**
@@ -45,6 +68,8 @@ public class Engins extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -52,6 +77,26 @@ public class Engins extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "TYPE", "LIBELLE"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 450, 470));
 
         jButton1.setText("RETOUR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -136,5 +181,7 @@ public class Engins extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

@@ -91,6 +91,42 @@ public class EnginDAO {
             return unEngin; 
         }
         
+        public static ArrayList<Engin> getLesEnginsByCaserneID(Connection connection, int cas_id){
+            ArrayList<Engin> lesEngins = new ArrayList<Engin>();
+
+
+            try {
+                requete=connection.prepareStatement("SELECT * FROM ENGIN");
+
+                //executer la reguete
+                rs=requete.executeQuery();
+                while(rs.next()){
+                    Engin unEngin = new Engin();
+                    
+                    
+                    Caserne uneCaserne = new Caserne();
+                    uneCaserne.setId(Integer.valueOf(rs.getString("ENG_ID")));
+                    
+                    EnginType untype = new EnginType();
+                    untype.setId(Integer.parseInt(rs.getString("ENGTYP_ID")));
+                    
+                    unEngin.setId(Integer.valueOf(rs.getString("ENG_ID")));
+                    unEngin.setLaCaserne(uneCaserne);
+                    unEngin.setLeTypeEngin(untype);
+                    unEngin.setLibelle(rs.getString("ENG_LIBELLE"));
+                    
+                    
+
+                    lesEngins.add(unEngin);
+                }
+                    ConnexionBdd.fermerConnexion(rs);
+                    ConnexionBdd.fermerConnexion(requete); 
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            return lesEngins; 
+        }
         
         
         
