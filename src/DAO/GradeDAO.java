@@ -54,6 +54,32 @@ public class GradeDAO {
     
     }
     
+        public static Grade getGradeByLibelle(Connection connection, String grade){
+        Grade leGrade = new Grade();
+            try {
+                requete=connection.prepareStatement("SELECT * FROM grade WHERE gra_libelle = ?");
+                System.out.print(grade);
+                requete.setString(1, String.valueOf(grade));
+                
+
+                rs=requete.executeQuery();
+                if(rs.next()){               
+                    
+                    leGrade.setId(Integer.valueOf(rs.getString("gra_id")));
+                    leGrade.setLibelle(rs.getString("gra_libelle")); 
+                    
+                }
+                
+                    ConnexionBdd.fermerConnexion(rs);
+                    ConnexionBdd.fermerConnexion(requete); 
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            return leGrade;
+    
+    }
+    
      public static ArrayList<Grade> getLesGrades(Connection connection){
         
             ArrayList<Grade> lesGrades = new ArrayList<Grade>();

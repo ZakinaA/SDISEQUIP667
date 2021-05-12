@@ -6,12 +6,14 @@
 package DAO;
 
 import static DAO.EnginDAO.requete;
+import static DAO.ProfessionnelDAO.requete;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modele.Profession;
 import modele.Volontaire;
 
 
@@ -73,5 +75,31 @@ public class VolontaireDAO {
             return laRep;
     
     }
+        
+    public static int AddVolontaire(Connection connection, Profession profession, int id){
+            //Caserne uneCaserne = new Caserne();
+            //ArrayList<Intervention> lesInterventions = null;
+            
+            int resultatUpdate = -1;
+            try {
+                requete=connection.prepareStatement("INSERT INTO profession(PRO_LIBELLE, PRO_VILLE) VALUES ( ?, ?) INSERT INTO volontaire (POM_ID, PRO_ID) VALUES ( ?, LAST_INSERT_ID() )");
+                requete.setString(1, String.valueOf(profession.getPro_libelle()));
+                requete.setString(2, String.valueOf(profession.getPro_ville()));
+                requete.setInt(3, id);
+
+
+                //executer la reguete
+                resultatUpdate = requete.executeUpdate();
+                
+                ConnexionBdd.fermerConnexion(rs);
+                ConnexionBdd.fermerConnexion(requete); 
+                
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            return resultatUpdate; 
+        } 
+        
     
 }

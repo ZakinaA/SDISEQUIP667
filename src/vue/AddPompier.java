@@ -8,6 +8,7 @@ import modele.Caserne;
 import DAO.CaserneDAO;
 import DAO.ConnexionBdd;
 import DAO.GradeDAO;
+import DAO.PompierDAO;
 import static java.lang.System.console;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -310,6 +311,43 @@ public class AddPompier extends javax.swing.JFrame {
         lePompier.setPom_telephone(tel);
         
         Caserne laCaserne = new Caserne();
+        laCaserne = CaserneDAO.getCaserneByLibelle(cnt, BoxCaserne);
+        
+        Grade leGrade = new Grade();
+        leGrade = GradeDAO.getGradeByLibelle(cnt, BoxGrade);
+        
+        lePompier.setLaCaserne(laCaserne);
+        lePompier.setLeGrade(leGrade);
+        
+        int result = PompierDAO.AddPompier(cnt, lePompier);
+        
+        if(result != 1){
+            j_error.setText("Erreur dans l'insertion");
+        }else if(result == 1){
+            j_error.setText("Caserne ajoutée");
+            
+            j_nom.setEnabled(false);
+            j_prenom.setEnabled(false);
+            j_naissance.setEnabled(false);
+            j_numbip.setEnabled(false);
+            j_sexe.setEnabled(false);
+            j_tel.setEnabled(false);
+            jGrade.setEnabled(false);
+            jCaserne.setEnabled(false);
+            jVol.setEnabled(false);
+            jPro.setEnabled(false);
+            j_naissance.setEnabled(false);
+            j_profession.setEnabled(false);
+            j_profession_i.setEnabled(false);
+            j_ville.setEnabled(false);
+            j_ville_i.setEnabled(false);
+            j_indice.setEnabled(false);
+            j_indice_i.setEnabled(false);
+            j_dtindice.setEnabled(false);
+            j_dtindice_i.setEnabled(false);
+            j_submit.setEnabled(false);
+           
+        }
         
         
     }//GEN-LAST:event_j_submitActionPerformed

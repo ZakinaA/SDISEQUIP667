@@ -52,4 +52,29 @@ public class ProfessionnelDAO {
     
     }
     
+       public static int AddProfessionnel(Connection connection, Professionnel professionnel, int id){
+            //Caserne uneCaserne = new Caserne();
+            //ArrayList<Intervention> lesInterventions = null;
+            
+            int resultatUpdate = -1;
+            try {
+                requete=connection.prepareStatement("INSERT INTO professionnel (POM_ID, PRO_INDICETRAITEMENT, PRO_DATEOBTENTIONINDICE) VALUES (?, ?, ?)");
+                requete.setInt(1, id);
+                requete.setString(3, String.valueOf(professionnel.getDateObtention()));
+                requete.setString(2, String.valueOf(professionnel.getIndiceTraitement()));
+
+
+                //executer la reguete
+                resultatUpdate = requete.executeUpdate();
+                
+                ConnexionBdd.fermerConnexion(rs);
+                ConnexionBdd.fermerConnexion(requete); 
+                
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            return resultatUpdate; 
+        }    
+    
 }

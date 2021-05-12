@@ -116,4 +116,32 @@ public class CaserneDAO {
             return lesCasernes; 
         }
         
+        public static Caserne getCaserneByLibelle(Connection connection, String pLibelle){
+            Caserne uneCaserne = new Caserne();
+
+            try {
+                requete=connection.prepareStatement("SELECT * FROM CASERNE WHERE CAS_NOM = ?");
+                requete.setString(1, String.valueOf(pLibelle));
+
+                //executer la reguete
+                rs=requete.executeQuery();
+                if (rs.next()){
+                    uneCaserne.setId(Integer.parseInt(rs.getString("CAS_ID")));
+                    uneCaserne.setNom(rs.getString("CAS_NOM"));
+                    uneCaserne.setRue(rs.getString("CAS_RUE"));
+                    uneCaserne.setCp(rs.getString("CAS_CP"));
+                    uneCaserne.setVille(rs.getString("CAS_VILLE"));
+                    
+
+                    
+                }
+                    ConnexionBdd.fermerConnexion(rs);
+                    ConnexionBdd.fermerConnexion(requete); 
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            return uneCaserne; 
+        }
+        
 }
