@@ -77,6 +77,7 @@
         </Constraint>
       </Constraints>
     </Component>
+<<<<<<< HEAD
     <Component class="javax.swing.JButton" name="jButton7">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -109,6 +110,8 @@
         </Constraint>
       </Constraints>
     </Component>
+=======
+>>>>>>> 8e2f45c51440ae8b341096348a6bdb94a8c86b7b
     <Component class="javax.swing.JLabel" name="j_prename">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

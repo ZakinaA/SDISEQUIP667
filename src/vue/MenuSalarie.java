@@ -151,10 +151,10 @@ public class MenuSalarie extends javax.swing.JFrame {
         if(isVolontaire == 1){
             Volontaire leVolontaire = VolontaireDAO.getVolontaire(cnt, leMatricule);
             Profession laProfession = ProfessionDAO.getProfession(cnt, leVolontaire.getProfessionId());
-            new Profil(leCompte, lePompier, leVolontaire, laProfession).setVisible(true);
+            new Profil(leCompte, lePompier, leVolontaire, laProfession, "accueil").setVisible(true);
         }else{
             Professionnel leProfessionnel = ProfessionnelDAO.getProfessionnel(cnt, leMatricule);
-            new Profil(leCompte, lePompier, leProfessionnel).setVisible(true);
+            new Profil(leCompte, lePompier, leProfessionnel, "accueil").setVisible(true);
         }
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
