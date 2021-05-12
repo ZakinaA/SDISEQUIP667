@@ -7,6 +7,7 @@ package vue;
 
 import DAO.ConnexionBdd;
 import DAO.EnginDAO;
+import static DAO.EnginDAO.getEnginTypeLibelleByID;
 import java.sql.Connection;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -53,7 +54,7 @@ public class Engins extends javax.swing.JFrame {
         jTable1.setModel(model);
         for(int i = 0; i < lesEngins.size(); i++){
             Engin unEngin = lesEngins.get(i) ;
-            model.addRow(new Object[] { String.valueOf(unEngin.getId()), unEngin.getLeTypeEngin().getId(),unEngin.getLibelle()});
+            model.addRow(new Object[] { String.valueOf(unEngin.getId()), getEnginTypeLibelleByID(connexion, unEngin.getLeTypeEngin().getId()),unEngin.getLibelle()});
 
         }
         
@@ -70,6 +71,7 @@ public class Engins extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton5 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -98,6 +100,14 @@ public class Engins extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 450, 470));
 
+        jButton5.setText("Ajouter un engin");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
+
         jButton1.setText("RETOUR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +135,12 @@ public class Engins extends javax.swing.JFrame {
         new CaserneVue(leCompte, laCaserne, laProvenance).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        new AddEngin().setVisible(true);
+        this.setVisible(false);
+
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,6 +194,7 @@ public class Engins extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -28,7 +28,31 @@ public class EnginDAO {
     Connection connection=null;
     static PreparedStatement requete = null;
     static ResultSet rs = null;
+        public static String getEnginTypeLibelleByID(Connection connection, int pCode){
+            Engin unEngin = new Engin();
+            String libelle = null;
 
+            try {
+                requete=connection.prepareStatement("SELECT * FROM ENGIN WHERE engin.ENG_ID = engintype.ENGTYP_ID AND ENG_ID = ?");
+                requete.setString(1, String.valueOf(pCode));
+
+                //executer la reguete
+                rs=requete.executeQuery();
+                if (rs.next()){
+               
+                    libelle = rs.getString("ENGTYP_LIBELLE");
+
+                
+                    
+                }
+                    ConnexionBdd.fermerConnexion(rs);
+                    ConnexionBdd.fermerConnexion(requete); 
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            return libelle; 
+        }
         public static Engin getEnginById(Connection connection, int pCode){
             Engin unEngin = new Engin();
             ArrayList<Intervention> lesInterventions = null;
