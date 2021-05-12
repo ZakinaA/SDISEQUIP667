@@ -30,6 +30,7 @@ public class Profil extends javax.swing.JFrame {
     Caserne laCaserne;
     String leType;
     Compte leCompte;
+    String laProvenance;
 
     /**
      * Creates new form Accueil
@@ -38,13 +39,16 @@ public class Profil extends javax.swing.JFrame {
         initComponents();
     }
     
-    public Profil(Compte unCompte, Pompier lePompier, Volontaire leVolontaire, Profession laProfession) {
+//FROM ACCUEIL
+    
+    public Profil(Compte unCompte, Pompier lePompier, Volontaire leVolontaire, Profession laProfession, String uneProvenance) {
         initComponents();
         
         leGrade = lePompier.getLeGrade();
         laCaserne = lePompier.getLaCaserne();
         leType = unCompte.getLeType();
         leCompte = unCompte;
+        laProvenance = uneProvenance;
         
         cnt = ConnexionBdd.ouvrirConnexion();
         ArrayList<Fonction> lesfonctions = FonctionsDAO.getFonctions(cnt, lePompier.getPom_id());
@@ -69,13 +73,14 @@ public class Profil extends javax.swing.JFrame {
     }
     
     
-    public Profil(Compte unCompte, Pompier lePompier, Professionnel leProfessionnel) {
+    public Profil(Compte unCompte, Pompier lePompier, Professionnel leProfessionnel, String uneProvenance) {
         initComponents();
         
         leGrade = lePompier.getLeGrade();
         laCaserne = lePompier.getLaCaserne();
         leType = unCompte.getLeType();
         leCompte = unCompte;
+        laProvenance = uneProvenance;
         
         cnt = ConnexionBdd.ouvrirConnexion();
         ArrayList<Fonction> lesfonctions = FonctionsDAO.getFonctions(cnt, lePompier.getPom_id());
@@ -98,6 +103,8 @@ public class Profil extends javax.swing.JFrame {
            
     }
 
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -164,7 +171,7 @@ public class Profil extends javax.swing.JFrame {
         jLabel9.setText("Fonction(s) :");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, -1, -1));
 
-        jButton5.setText("ACCUEIL");
+        jButton5.setText("RETOUR");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -235,10 +242,14 @@ public class Profil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if(leType.equals("a")){
-            new MenuAdmin(leCompte).setVisible(true);
-        }else if(leType.equals("s")){
-            new MenuSalarie(leCompte).setVisible(true);
+        if(laProvenance.equals("accueil")){
+            if(leType.equals("a")){
+                new MenuAdmin(leCompte).setVisible(true);
+            }else if(leType.equals("s")){
+                new MenuSalarie(leCompte).setVisible(true);
+            }
+        }else if(laProvenance.equals("pompiers")){
+            new Pompiers(leCompte, "accueil").setVisible(true);
         }
         this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed

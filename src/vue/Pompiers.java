@@ -5,14 +5,21 @@
  */
 package vue;
 
+import DAO.CaserneDAO;
 import DAO.ConnexionBdd;
 import DAO.PompierDAO;
+import DAO.ProfessionDAO;
+import DAO.ProfessionnelDAO;
+import DAO.VolontaireDAO;
 import java.sql.Connection;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import modele.Caserne;
 import modele.Compte;
 import modele.Pompier;
+import modele.Profession;
+import modele.Professionnel;
+import modele.Volontaire;
 
 /**
  *
@@ -21,6 +28,7 @@ import modele.Pompier;
 public class Pompiers extends javax.swing.JFrame {
     
     Caserne laCaserne;
+    Pompier lePompier;
     Connection cnt;
     Compte leCompte;
     String laProvenance;
@@ -188,14 +196,24 @@ public class Pompiers extends javax.swing.JFrame {
         if(jTable.getValueAt(jTable.getSelectedRow(), 0) != null){
 
             int id = Integer.parseInt((String) jTable.getValueAt(jTable.getSelectedRow(), 0));
-
+                   
             //GetCaserne
-            //cnt = ConnexionBdd.ouvrirConnexion();
-            //lePompier = CaserneDAO.getCaserneById(cnt, id);
-
-            //GoToPage
-                //new CaserneVue(leCompte, laCaserne, "listecaserne").setVisible(true);
-                //this.setVisible(false);
+            cnt = ConnexionBdd.ouvrirConnexion();
+            lePompier = PompierDAO.getPompier(cnt, id);
+            
+            System.out.println(lePompier.getLeGrade());
+                 
+            int isVolontaire = VolontaireDAO.isVolontaire(cnt, id);
+            
+            if(isVolontaire == 1){
+                Volontaire leVolontaire = VolontaireDAO.getVolontaire(cnt, id);
+                Profession laProfession = ProfessionDAO.getProfession(cnt, leVolontaire.getProfessionId());
+                new Profil(leCompte, lePompier, leVolontaire, laProfession, "pompiers").setVisible(true);
+            }else{
+                Professionnel leProfessionnel = ProfessionnelDAO.getProfessionnel(cnt, id);
+                new Profil(leCompte, lePompier, leProfessionnel, "pompiers").setVisible(true);
+            }
+            this.setVisible(false);
             //System.out.println(jTable.getValueAt(jTable.getSelectedRow(), 0).toString());
         }
     }//GEN-LAST:event_jTableMouseClicked

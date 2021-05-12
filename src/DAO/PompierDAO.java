@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import static DAO.CompteDAO.rs;
 import static DAO.EnginDAO.requete;
 import static DAO.FonctionsDAO.rs;
 import java.sql.Connection;
@@ -14,6 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modele.Caserne;
+import modele.Grade;
 import modele.Pompier;
 import modele.Pompier;
 
@@ -30,8 +33,10 @@ public class PompierDAO {
     
     public static Pompier getPompier(Connection connection, int matricule){
         Pompier lePompier = new Pompier();
+        Grade leGrade = new Grade();
+        Caserne laCaserne = new Caserne();
             try {
-                requete=connection.prepareStatement("SELECT * FROM Pompier WHERE pom_id = ?");
+                requete=connection.prepareStatement("SELECT * FROM GRADE, POMPIER, CASERNE WHERE pompier.pom_id = ? ORDER BY pompier.pom_id LIMIT 1");
                 requete.setString(1, String.valueOf(matricule));
                 
 
@@ -45,6 +50,21 @@ public class PompierDAO {
                     lePompier.setPom_numeroBip(Integer.valueOf(rs.getString("pom_numerobip")));
                     lePompier.setPom_sexe(rs.getString("pom_sexe"));
                     lePompier.setPom_telephone(rs.getString("pom_telephone"));
+                    
+                    //SET CASERNE 
+                    laCaserne.setId(Integer.valueOf(rs.getString("cas_id")));
+                    laCaserne.setNom(rs.getString("cas_nom"));
+                    laCaserne.setRue(rs.getString("cas_rue"));
+                    laCaserne.setCp(rs.getString("cas_CP"));
+                    laCaserne.setVille(rs.getString("cas_ville"));
+                    
+                    //SET GRADE
+                    leGrade.setId(Integer.valueOf(rs.getString("gra_id")));
+                    leGrade.setLibelle(rs.getString("gra_libelle"));
+
+                    //SET ITEMS
+                    lePompier.setLeGrade(leGrade);
+                    lePompier.setLaCaserne(laCaserne);
                     
                 }
 
