@@ -8,8 +8,10 @@ package vue;
 import DAO.CaserneDAO;
 import DAO.ConnexionBdd;
 import DAO.EnginDAO;
+import DAO.EnginTypeDAO;
 import java.awt.Color;
 import java.sql.Connection;
+import java.util.ArrayList;
 import modele.Caserne;
 import modele.Compte;
 import modele.Engin;
@@ -40,6 +42,18 @@ public class AddEngin extends javax.swing.JFrame {
         laCaserne = uneCaserne;
         laProvenance = uneProvenance;
         
+        Connection connection =  ConnexionBdd.ouvrirConnexion();
+        ArrayList<EnginType> lesTypes = EnginTypeDAO.getLesTypes(connection);
+        
+        for(int i = 0; i < lesTypes.size(); i++){
+            EnginType unType = lesTypes.get(i) ;
+            jComboBox1.add(unType.getLibelle());
+
+        }
+        
+        
+        
+        
     }
 
     AddEngin(Compte leCompte) {
@@ -57,8 +71,8 @@ public class AddEngin extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         messageError = new javax.swing.JLabel();
-        enginTypeField = new javax.swing.JTextField();
         enginAddButton = new javax.swing.JButton();
         enginCaserne = new javax.swing.JTextField();
         enginType2 = new javax.swing.JLabel();
@@ -82,17 +96,13 @@ public class AddEngin extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/barre.png"))); // NOI18N
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 720, 60));
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, 120, -1));
+
         messageError.setFont(new java.awt.Font("Reem Kufi", 0, 14)); // NOI18N
         messageError.setForeground(new java.awt.Color(255, 204, 204));
         messageError.setText("MESSAGE");
         getContentPane().add(messageError, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 420, 30));
-
-        enginTypeField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enginTypeFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(enginTypeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, 100, -1));
 
         enginAddButton.setText("Valider");
         enginAddButton.addActionListener(new java.awt.event.ActionListener() {
@@ -151,8 +161,8 @@ public class AddEngin extends javax.swing.JFrame {
     private void enginAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enginAddButtonActionPerformed
         
         messageError.setVisible(false);
-        
-        int type = Integer.valueOf(enginTypeField.getText());
+        Connection connection =  ConnexionBdd.ouvrirConnexion();
+        int type = Integer.valueOf(EnginTypeDAO.getEnginByLibelle(connection, jComboBox1.getSelectedItem().toString()));
         int caserne = Integer.valueOf(enginCaserne.getText());
         String libelle = enginName.getText();
         
@@ -169,7 +179,7 @@ public class AddEngin extends javax.swing.JFrame {
         unEngin.setLibelle(libelle);
         
         
-        Connection cnt =  ConnexionBdd.ouvrirConnexion();
+
         int result = EnginDAO.AddEngin(cnt, unEngin);
         
         if(result == 1){
@@ -185,10 +195,6 @@ public class AddEngin extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_enginAddButtonActionPerformed
-
-    private void enginTypeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enginTypeFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_enginTypeFieldActionPerformed
 
     private void enginCaserneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enginCaserneActionPerformed
         // TODO add your handling code here:
@@ -241,8 +247,8 @@ public class AddEngin extends javax.swing.JFrame {
     private javax.swing.JLabel enginType;
     private javax.swing.JLabel enginType1;
     private javax.swing.JLabel enginType2;
-    private javax.swing.JTextField enginTypeField;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

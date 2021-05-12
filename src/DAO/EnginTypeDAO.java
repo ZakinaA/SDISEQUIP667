@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modele.EnginType;
 
 /**
@@ -43,7 +44,27 @@ public class EnginTypeDAO {
             return unEnginType; 
         }
         
-        
+        public static String getEnginByLibelle(Connection connection, String name){
+            EnginType unEnginType = new EnginType();
+            try {
+                requete=connection.prepareStatement("SELECT * FROM ENFINTYPE WHERE ENGTYP_LIBELLE = ?");
+                requete.setString(1, String.valueOf(name));
+
+                //executer la reguete
+                rs=requete.executeQuery();
+                if (rs.next()){
+                    unEnginType.setId(Integer.parseInt(rs.getString("ENGTYP_ID")));
+                    unEnginType.setLibelle(rs.getString("ENGTYP_LIBELLE"));
+                  
+                }
+                    ConnexionBdd.fermerConnexion(rs);
+                    ConnexionBdd.fermerConnexion(requete); 
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            return unEnginType.getLibelle(); 
+        }   
         
         
         public static int AddTypeEngin(Connection connection, String libelle){
@@ -90,7 +111,32 @@ public class EnginTypeDAO {
             return resultatUpdate;
         }
         
+    public static ArrayList<EnginType> getLesTypes(Connection connection){
         
+            ArrayList<EnginType> lesTypes = new ArrayList<EnginType>();
+
+
+            try {
+                requete=connection.prepareStatement("SELECT * FROM engintype");
+
+                //executer la reguete
+                rs=requete.executeQuery();
+                while(rs.next()){
+                    EnginType unType = new EnginType();
+                    unType.setId(Integer.parseInt(rs.getString("ENGTYP_ID")));
+                    unType.setLibelle(rs.getString("ENGTYP_LIBELLE"));
+                    
+
+                    lesTypes.add(unType);
+                }
+                    ConnexionBdd.fermerConnexion(rs);
+                    ConnexionBdd.fermerConnexion(requete); 
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            return lesTypes; 
+        }
         
         
 }
