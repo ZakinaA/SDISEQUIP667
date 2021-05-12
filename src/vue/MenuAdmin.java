@@ -59,6 +59,8 @@ public class MenuAdmin extends javax.swing.JFrame {
         j_name.setText(String.valueOf(lePompier.getPom_prenom()));
     }
 
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,6 +74,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         quitButton = new javax.swing.JButton();
         j_prename = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -98,13 +101,13 @@ public class MenuAdmin extends javax.swing.JFrame {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, -1));
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/client.png"))); // NOI18N
-        jButton4.setText("LISTE DES INTERVENTIONS");
+        jButton4.setText("LISTE DES ENGINS");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 390, 80));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 400, 390, 80));
 
         jButton3.setText("MES INTERVENTIONS");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +116,15 @@ public class MenuAdmin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 180, -1));
+
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/client.png"))); // NOI18N
+        jButton7.setText("LISTE DES INTERVENTIONS");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 390, 80));
 
         quitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/key.png"))); // NOI18N
         quitButton.setText("QUITTER");
@@ -206,7 +218,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new ListeInter(leCompte, "accueil").setVisible(true);    
+        new Engins(leCompte, laCaserne, "accueil", "global").setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -221,7 +233,9 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+       
+        new ListeInter(leCompte, "accueil").setVisible(true);    
+        this.setVisible(false);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void quitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quitButtonMouseClicked
@@ -276,6 +290,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

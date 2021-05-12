@@ -5,9 +5,15 @@
  */
 package vue;
 
+import DAO.CaserneDAO;
+import DAO.ConnexionBdd;
+import DAO.EnginDAO;
 import java.sql.Connection;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import modele.Caserne;
 import modele.Compte;
+import modele.Engin;
 
 /**
  *
@@ -24,15 +30,37 @@ public class Engins extends javax.swing.JFrame {
      * Creates new form Accueil
      */
     public Engins() {
-        initComponents();
+        initComponents();      
     }
     
-    public Engins(Compte unCompte, Caserne uneCaserne, String uneProvenance) {
+    public Engins(Compte unCompte, Caserne uneCaserne, String uneProvenance, String recherche) {
         initComponents();
         
         leCompte = unCompte;
         laCaserne = uneCaserne;
         laProvenance = uneProvenance;
+        
+        
+        Connection cnt =  ConnexionBdd.ouvrirConnexion();
+        ArrayList<Engin> lesEngins;
+        if(recherche.equals("caserne")){
+            lesEngins = EnginDAO.getLesEngins(cnt);
+        }else{
+             lesEngins = EnginDAO.getLesEngins(cnt);
+        }
+       
+        
+        
+        
+        DefaultTableModel model =  new DefaultTableModel(new String[]{"ID", "TYPE", "CASERNE", "LIBELLE"}, 1);
+        
+        
+        jTable1.setModel(model);
+        for(int i = 0; i < lesEngins.size(); i++){
+            Engin unEngin = lesEngins.get(i) ;
+            model.addRow(new Object[] { String.valueOf(unEngin.getId()), unEngin.getLeTypeEngin().getId(), unEngin.getLaCaserne().getId(), unEngin.getLibelle()});
+
+        }
         
     }
 
@@ -46,6 +74,10 @@ public class Engins extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        enginAddType = new javax.swing.JButton();
+        enginAddEngin = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -60,6 +92,34 @@ public class Engins extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        enginAddType.setText("AJOUTER TYPE");
+        enginAddType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enginAddTypeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(enginAddType, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 130, 40));
+
+        enginAddEngin.setText("AJOUTER UN ENGIN");
+        enginAddEngin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enginAddEnginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(enginAddEngin, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 150, 40));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "ENGIN TYPE", "CASERNE ID", "LIBELLE"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, 470));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/barre.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 720, 60));
@@ -77,9 +137,19 @@ public class Engins extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new CaserneVue(leCompte, laCaserne, laProvenance).setVisible(true);
+        new MenuAdmin(leCompte).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void enginAddTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enginAddTypeActionPerformed
+        new AddTypeEngin().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_enginAddTypeActionPerformed
+
+    private void enginAddEnginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enginAddEnginActionPerformed
+        new AddEngin().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_enginAddEnginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -106,22 +176,8 @@ public class Engins extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Engins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -132,9 +188,13 @@ public class Engins extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton enginAddEngin;
+    private javax.swing.JButton enginAddType;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

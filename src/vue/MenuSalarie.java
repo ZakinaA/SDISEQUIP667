@@ -106,18 +106,13 @@ public class MenuSalarie extends javax.swing.JFrame {
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 150, -1));
 
         quitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vue/key.png"))); // NOI18N
-        quitButton.setText("Quitter");
-        quitButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                quitButtonMouseClicked(evt);
-            }
-        });
+        quitButton.setText("QUITTER");
         quitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quitButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(quitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 120, -1));
+        getContentPane().add(quitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 120, -1));
 
         j_prename.setFont(new java.awt.Font("Reem Kufi", 0, 22)); // NOI18N
         j_prename.setForeground(new java.awt.Color(255, 204, 204));
@@ -184,7 +179,7 @@ public class MenuSalarie extends javax.swing.JFrame {
     }//GEN-LAST:event_quitButtonMouseClicked
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
-        System.exit(0);
+        new Connexion().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_quitButtonActionPerformed
 
